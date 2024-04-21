@@ -5,7 +5,7 @@ class Controller {
     //console.log('manager instanciation');
     this.model = new Model();
     this.view = new View();
-    this.board = new GameBoard(CELL_MAX_X, CELL_MAX_Y);
+    this.board = new GameBoard(CELL_MAX_X, CELL_MAX_Y, this.model);
   }
   
   init() {
@@ -17,13 +17,12 @@ class Controller {
   run() {
    //console.log('controller run');
    this.view.clearView();
-   this.view.renderBoard(this.board);
+   this.view.renderBoard(this.board, this.model);
   }
   
   handleRunKey() {
-    console.log('controller : run');
-    model.setIsSimulationRunning(!model.getIsSimulationRunning());
-    console.log('is running :', model.getIsSimulationRunning());
+    this.model.setIsSimulationRunning(!this.model.getIsSimulationRunning());
+    //console.log('is running après:', this.model.getIsSimulationRunning());
   }
   
   handleNextKey() {

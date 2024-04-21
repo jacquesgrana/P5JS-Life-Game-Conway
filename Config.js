@@ -1,15 +1,23 @@
 
 
-const CELL_SIZE = 20;
-const CELL_MAX_X = 40;
-const CELL_MAX_Y = 40;
+const CELL_SIZE = 8;
+const BOARD_WIDTH = 800;
+const BOARD_HEIGHT = 800;
+const CELL_MAX_X = Math.floor(BOARD_WIDTH / CELL_SIZE);
+const CELL_MAX_Y = Math.floor(BOARD_HEIGHT / CELL_SIZE);
+/*
+const CELL_MAX_X = 100;
+const CELL_MAX_Y = 100;
 
 const BOARD_WIDTH = CELL_MAX_X * CELL_SIZE;
 const BOARD_HEIGHT = CELL_MAX_Y * CELL_SIZE;
+*/
 
 const INFOS_HEIGHT = 100;
 
-const CELL_ALIVE_PROBA_PERCENT = 0;
+const CELL_ALIVE_PROBA_PERCENT = 38;
+
+const FRAME_COUNT = 4;
 
 const CELL_STROKE_WEIGHT = 1;
 

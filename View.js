@@ -1,7 +1,9 @@
 class View {
  
+  
   constructor() {
     //console.log('view instanciation');
+    this.frameCounter = 0;
   }
   
   init() {
@@ -15,7 +17,7 @@ class View {
      background(BG_COLOR);
   }
   
-  renderBoard(board) {
+  renderBoard(board, model) {
     let cellColor = color(0, 0, 0);
     for (let x = 0; x < CELL_MAX_X; x++) {
       for (let y = 0; y < CELL_MAX_Y; y++) {
@@ -30,7 +32,18 @@ class View {
       }
     }
     
-    this.displayInfos(board);
+    this.displayInfos(board, model);
+    
+    if(model.getIsSimulationRunning()) {
+      this.frameCounter++;
+      //console.log('counter:', this.frameCounter);
+      if(this.frameCounter >= model.getFrameInterval()) {
+        board.generateNext();
+        this.frameCounter = 0;
+      }
+      
+    }
+    
     //this.drawLines(CELL_MAX_X, CELL_MAX_Y);
     
     /*
@@ -51,7 +64,7 @@ class View {
     */
   }
   
-  displayInfos(board) {
+  displayInfos(board, model) {
     //console.log('counter :', board.getGenCounter());
     /*
     strokeWeight(CELL_STROKE_WEIGHT);
@@ -62,7 +75,7 @@ class View {
     fill(PRIMARY_COLOR);
     textSize(16);
     textAlign(LEFT, TOP);
-    text('Génération n° ' + board.getGenCounter(), 20, BOARD_HEIGHT + 20);
+    text('Génération n° ' + model.getGenCounter(), 20, BOARD_HEIGHT + 20);
   }
   
   /*

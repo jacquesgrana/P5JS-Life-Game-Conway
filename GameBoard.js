@@ -1,19 +1,20 @@
 class GameBoard {
  
-  constructor(width, height) {
+  constructor(width, height, model) {
     this.width = width;
     this.height = height;
-    this.cells = this.initCells();
-    this.genCounter = 0;
+    this.model = model;
+    this.cells = this.initCells(this.model);
+    //this.genCounter = 0;
     //console.log('cells : ', this.cells);
   }
   
-    initCells() {
+    initCells(model) {
     let cells = new Array(this.width);
     for (let x = 0; x < this.width; x++) {
       cells[x] = new Array(this.height);
       for (let y = 0; y < this.height; y++) {
-        const state = this.calculateRandomState();
+        const state = this.calculateRandomState(model);
         cells[x][y] = new Cell(state, x, y);
       }
     }
@@ -33,7 +34,7 @@ class GameBoard {
         newCells[x][y] =  new Cell(this.getNewState(x, y), x, y);
       }
     }
-    this.genCounter++;
+    this.model.setGenCounter(this.model.getGenCounter() + 1);
     //console.log('genCounter:', this.genCounter);
     this.cells = newCells;
   }
@@ -75,8 +76,8 @@ class GameBoard {
     return this.getNeighborhood(x, y).filter((c) => c.getState() === false).length;
   } 
   
-  calculateRandomState() {
-    const aliveProba = CELL_ALIVE_PROBA_PERCENT / 100;
+  calculateRandomState(model) {
+    const aliveProba = model.getCellAliveProbaPercent() / 100;
     // faire code qui met toReturn à true de manière aléatoire avec une probabilité : aliveProba
     return Math.random() < aliveProba;
   }
