@@ -1,6 +1,6 @@
 
 
-const CELL_SIZE = 8;
+const CELL_SIZE = 10;
 const BOARD_WIDTH = 800;
 const BOARD_HEIGHT = 800;
 const CELL_MAX_X = Math.floor(BOARD_WIDTH / CELL_SIZE);
@@ -26,6 +26,7 @@ const CELL_STROKE_WEIGHT = 1;
 
 var BG_COLOR;
 var LINES_COLOR;
+var TEXT_COLOR;
 var PRIMARY_COLOR;
 var CELL_ALIVE_COLOR;
 var CELL_DEAD_COLOR;
@@ -38,6 +39,7 @@ function initConfigColors() {
   //console.log('colors init');
   BG_COLOR = color(50,50,50);
   LINES_COLOR = color(50,50,200);
+  TEXT_COLOR = color(120,120,50);
   PRIMARY_COLOR = color(255, 119, 51);
   CELL_ALIVE_COLOR = color(204, 102, 0);
   CELL_DEAD_COLOR = color(153,153,255);

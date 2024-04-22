@@ -21,12 +21,31 @@ class Controller {
    this.view.renderBoard(this);
   }
   
-  handleResetButtonClick(isClicked) {
-    if(isClicked) {this.board.reset();}
+  handleRunButtonClick(isClicked) {
+    if(isClicked) {
+      this.model.setIsSimulationRunning(!this.model.getIsSimulationRunning());
+      this.view.updateButtons(this.model.getIsSimulationRunning());
+    }
   }
   
- handleClearButtonClick(isClicked) {
-    if(isClicked) {this.board.empty();}
+  handleNextButtonClick(isClicked) {
+    if(isClicked) {
+      this.board.generateNext();
+    }
+  }
+  
+  handleResetButtonClick(isClicked) {
+    if(isClicked) {
+      this.board.reset();
+      this.model.genCounter = 0;
+    }
+  }
+  
+  handleClearButtonClick(isClicked) {
+    if(isClicked) {
+      this.board.empty();
+      this.model.genCounter = 0;
+    }
   }
   
   handleRunKey() {
