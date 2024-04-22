@@ -71,12 +71,13 @@ class Button {
     noStroke();
     text(this.text, this.posI + this.sizeI/2, this.posJ + this.sizeJ/2);
     textAlign(LEFT);
-    const textColorRes = this.textColor;
+    //const textColorRes = this.textColor;
+    /*
     if (this.isEnabled) {
       this.textColor  = textColorRes;
     } else {
       this.textColor  = this.colorDisabled;
-    }
+    }*/
   }
 
   /**
@@ -89,7 +90,7 @@ class Button {
       if (mouseX > this.posI && mouseX < (this.posI + this.sizeI) && mouseY > this.posJ && mouseY < (this.posJ + this.sizeJ)) {
         
           this.buttonStkColor = this.strokeColorMouseOver;
-          this.textColor = this.strokeColorMouseOver;
+          //this.textColor = this.strokeColorMouseOver;
           if (mouseIsPressed && !this.hasBeenClicked) { //  mouseIsPressed // mouseup // mouseClicked(change_background)
             this.isClicked = true;
             this.callback(true);
@@ -106,7 +107,8 @@ class Button {
       }
       //this.callback(this.isClicked);
     } else {
-      this.textColor  = this.colorDisabled;
+      //this.textColor  = this.colorDisabled;
+      this.buttonBgColor = this.colorDisabled;
       this.isClicked = false;
       this.hasBeenClicked = false;
     }

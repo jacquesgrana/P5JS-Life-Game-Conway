@@ -109,7 +109,7 @@ class View {
   }
   
   displayInfos(controller) {
-    fill(PRIMARY_COLOR);
+    fill(TEXT_COLOR);
     textSize(16);
     textAlign(LEFT, TOP);
     text('Génération n° ' + controller.model.getGenCounter(), PADDING, BOARD_HEIGHT + PADDING);
