@@ -24,6 +24,23 @@ class GameBoard {
     return cells;
   }
   
+  // TODO faire fonction
+  empty() {
+    let cells = new Array(this.width);
+    for (let x = 0; x < this.width; x++) {
+      cells[x] = new Array(this.height);
+      for (let y = 0; y < this.height; y++) {
+        //const state = this.calculateRandomState(model);
+        cells[x][y] = new Cell(false, x, y);
+      }
+    }
+    this.cells = cells;
+  }
+  
+  reset() {
+    this.cells = this.initCells(this.model);
+  }
+  
   generateNext() {
     //console.log('board : next');
     //this.cells = [];
