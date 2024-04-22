@@ -14,6 +14,9 @@ const BOARD_HEIGHT = CELL_MAX_Y * CELL_SIZE;
 */
 
 const INFOS_HEIGHT = 100;
+const PADDING = 20;
+const BUTTON_WIDTH = 60;
+const BUTTON_HEIGHT = 30;
 
 const CELL_ALIVE_PROBA_PERCENT = 38;
 
@@ -27,6 +30,9 @@ var PRIMARY_COLOR;
 var CELL_ALIVE_COLOR;
 var CELL_DEAD_COLOR;
 var CELL_TEST_COLOR;
+var BUTTON_BG_COLOR;
+var BUTTON_BG_HOVER_COLOR;
+var BUTTON_BG_DISABLED_COLOR;
 
 function initConfigColors() {
   //console.log('colors init');
@@ -36,4 +42,7 @@ function initConfigColors() {
   CELL_ALIVE_COLOR = color(204, 102, 0);
   CELL_DEAD_COLOR = color(153,153,255);
   CELL_TEST_COLOR = color(200,200,50);
+  BUTTON_BG_COLOR = color(100,100,100);
+  BUTTON_BG_HOVER_COLOR = color(150,150,150);
+  BUTTON_BG_DISABLED_COLOR = color(75,75,75);
 }

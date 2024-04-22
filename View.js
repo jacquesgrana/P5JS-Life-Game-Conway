@@ -1,14 +1,56 @@
 class View {
  
   
-  constructor() {
+  constructor(controller) {
     //console.log('view instanciation');
     this.frameCounter = 0;
+    this.buttonReset = new Button(
+    BOARD_WIDTH - (BUTTON_WIDTH + PADDING), 
+    BOARD_HEIGHT + PADDING, 
+    BUTTON_WIDTH, 
+    BUTTON_HEIGHT, 
+    'Reset', 
+    BUTTON_BG_COLOR, 
+    LINES_COLOR, 
+    LINES_COLOR, 
+    BUTTON_BG_HOVER_COLOR, 
+    BUTTON_BG_HOVER_COLOR, 
+    BUTTON_BG_DISABLED_COLOR, 
+    true, 
+    controller.handleResetButtonClick.bind(controller)
+    );
+    
+    this.buttonClear = new Button(
+    BOARD_WIDTH - 2 * (BUTTON_WIDTH + PADDING), 
+    BOARD_HEIGHT + PADDING, 
+    BUTTON_WIDTH, 
+    BUTTON_HEIGHT, 
+    'Clear', 
+    BUTTON_BG_COLOR, 
+    LINES_COLOR, 
+    LINES_COLOR, 
+    BUTTON_BG_HOVER_COLOR, 
+    BUTTON_BG_HOVER_COLOR, 
+    BUTTON_BG_DISABLED_COLOR, 
+    true, 
+    controller.handleClearButtonClick.bind(controller)
+    );
   }
+  
+  /*
+  buttonBgColor,
+  buttonStkColor, 
+  strokeColor, 
+  textColor, 
+  strokeColorMouseOver, 
+  colorDisabled, 
+  isEnabled,
+  callback
+  */
   
   init() {
     //console.log('view init');
-    initConfigColors();
+    
     createCanvas(BOARD_WIDTH, BOARD_HEIGHT + INFOS_HEIGHT);
     background(BG_COLOR);
   }
@@ -17,11 +59,11 @@ class View {
      background(BG_COLOR);
   }
   
-  renderBoard(board, model) {
+  renderBoard(controller) {
     let cellColor = color(0, 0, 0);
     for (let x = 0; x < CELL_MAX_X; x++) {
       for (let y = 0; y < CELL_MAX_Y; y++) {
-        const cell = board.getCell(x, y);
+        const cell = controller.board.getCell(x, y);
         if (cell.getState()) {
           cellColor = CELL_ALIVE_COLOR;
         }
@@ -32,50 +74,29 @@ class View {
       }
     }
     
-    this.displayInfos(board, model);
+    this.displayInfos(controller);
     
-    if(model.getIsSimulationRunning()) {
+    if(controller.model.getIsSimulationRunning()) {
       this.frameCounter++;
       //console.log('counter:', this.frameCounter);
-      if(this.frameCounter >= model.getFrameInterval()) {
-        board.generateNext();
+      if(this.frameCounter >= controller.model.getFrameInterval()) {
+        controller.board.generateNext();
         this.frameCounter = 0;
       }
-      
     }
-    
     //this.drawLines(CELL_MAX_X, CELL_MAX_Y);
-    
-    /*
-    const cellsClose = board.getNeighborhood(0, 0);
-    cellsClose.forEach((c) => {
-      this.drawCell(c.getPosX(), c.getPosY(), CELL_ALIVE_COLOR);
-    });
-    */
-    
-    /*
-    //board.cells[14][15].setState(true);
-    board.setCellState(14, 15, true);
-    board.setCellState(14, 14, true);
-    const aliveCellsNumber = board.getAliveNeighborhood(15,15);
-    //console.log('alive cells :', aliveCellsNumber);
-    const deadCellsNumber = board.getDeadNeighborhood(15,15);
-    //console.log('dead cells :', deadCellsNumber);
-    */
   }
   
-  displayInfos(board, model) {
-    //console.log('counter :', board.getGenCounter());
-    /*
-    strokeWeight(CELL_STROKE_WEIGHT);
-    stroke(LINES_COLOR);
-    fill(BG_COLOR);
-    rect(0, BOARD_HEIGHT, BOARD_WIDTH, INFOS_HEIGHT);
-    */
+  displayInfos(controller) {
     fill(PRIMARY_COLOR);
     textSize(16);
     textAlign(LEFT, TOP);
-    text('Génération n° ' + model.getGenCounter(), 20, BOARD_HEIGHT + 20);
+    text('Génération n° ' + controller.model.getGenCounter(), PADDING, BOARD_HEIGHT + PADDING);
+   
+    this.buttonReset.drawButton();
+    this.buttonReset.run();
+    this.buttonClear.drawButton();
+    this.buttonClear.run();
   }
   
   /*

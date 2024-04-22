@@ -3,8 +3,9 @@ class Controller {
   
   constructor() {
     //console.log('manager instanciation');
+    initConfigColors();
     this.model = new Model();
-    this.view = new View();
+    this.view = new View(this);
     this.board = new GameBoard(CELL_MAX_X, CELL_MAX_Y, this.model);
   }
   
@@ -17,7 +18,15 @@ class Controller {
   run() {
    //console.log('controller run');
    this.view.clearView();
-   this.view.renderBoard(this.board, this.model);
+   this.view.renderBoard(this);
+  }
+  
+  handleResetButtonClick(isClicked) {
+    if(isClicked) {this.board.reset();}
+  }
+  
+ handleClearButtonClick(isClicked) {
+    if(isClicked) {this.board.empty();}
   }
   
   handleRunKey() {
