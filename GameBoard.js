@@ -9,7 +9,7 @@ class GameBoard {
     //console.log('cells : ', this.cells);
   }
   
-    initCells(model) {
+  initCells(model) {
     let cells = new Array(this.width);
     for (let x = 0; x < this.width; x++) {
       cells[x] = new Array(this.height);

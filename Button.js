@@ -73,7 +73,7 @@ class Button {
     textAlign(LEFT);
     const textColorRes = this.textColor;
     if (this.isEnabled) {
-      //this.textColor  = textColorRes;
+      this.textColor  = textColorRes;
     } else {
       this.textColor  = this.colorDisabled;
     }
@@ -95,6 +95,7 @@ class Button {
             this.callback(true);
             this.buttonBgColor = this.strokeColorMouseOver;
             this.hasBeenClicked = true;
+            this.launchTempo(250);
           }
         
       } else {
@@ -111,6 +112,12 @@ class Button {
     }
     
     
+  }
+  
+   launchTempo(time) {
+      setTimeout(() => {
+        this.hasBeenClicked = false;
+      }, time);
   }
 
   /**
