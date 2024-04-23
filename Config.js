@@ -46,6 +46,6 @@ function initConfigColors() {
   CELL_DEAD_COLOR = color(25,25,25);
   CELL_TEST_COLOR = color(200,200,50);
   BUTTON_BG_COLOR = color(35,35,35);
-  BUTTON_BG_HOVER_COLOR = color(150,150,150);
+  BUTTON_BG_HOVER_COLOR = color(80,80,80);
   BUTTON_BG_DISABLED_COLOR = color(10,10,10);
 }

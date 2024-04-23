@@ -64,7 +64,9 @@ class Controller {
    if(mx >= 0 
    && mx <= BOARD_WIDTH 
    && my >= 0 
-   && my <= BOARD_HEIGHT) {
+   && my <= BOARD_HEIGHT
+   && !this.model.getIsSimulationRunning()
+   ) {
      const x = Math.floor(mx / CELL_SIZE);
      const y = Math.floor(my / CELL_SIZE);
      //console.log('x:', x, 'y:', y);
