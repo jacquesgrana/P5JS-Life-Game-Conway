@@ -21,6 +21,10 @@ class Controller {
    this.view.renderBoard(this);
   }
   
+  handleSpeedSliderModif(value) {
+    this.model.setFrameInterval(int(value));
+  }
+  
   handleRunButtonClick(isClicked) {
     if(isClicked) {
       this.model.setIsSimulationRunning(!this.model.getIsSimulationRunning());
@@ -37,14 +41,18 @@ class Controller {
   handleResetButtonClick(isClicked) {
     if(isClicked) {
       this.board.reset();
-      this.model.genCounter = 0;
+      this.model.reset();
+      this.view.setSliderSimulSpeedValue(this.model.getFrameInterval());
+      //console.log('controller : reset : this.model.getFrameInterval()', this.model.getFrameInterval());
     }
   }
   
   handleClearButtonClick(isClicked) {
     if(isClicked) {
       this.board.empty();
-      this.model.genCounter = 0;
+      this.model.reset();
+      this.view.setSliderSimulSpeedValue(this.model.getFrameInterval());
+      //console.log('controller : clear : this.model.getFrameInterval()', this.model.getFrameInterval());
     }
   }
   

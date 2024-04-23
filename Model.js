@@ -5,12 +5,20 @@ class Model {
     this.isSimulationRunning = false;
     this.genCounter = 0;
     this.cellAliveProbaPercent = CELL_ALIVE_PROBA_PERCENT;
-    this.frameInterval = FRAME_COUNT;
+    this.frameInterval = int(FRAME_COUNT);
   }
   
   init() {
     //console.log('model init'); 
     //this.cellAliveProbaPercent = CELL_ALIVE_PROBA_PERCENT;
+  }
+  
+  reset() {
+    //console.log('model : reset : FRAME_COUNT:', FRAME_COUNT);
+    this.genCounter = 0;
+    this.cellAliveProbaPercent = CELL_ALIVE_PROBA_PERCENT;
+    this.frameInterval = int(FRAME_COUNT);
+    //console.log('model : reset : this.frameInterval:', this.frameInterval);
   }
   
   setIsSimulationRunning (isRunning) {

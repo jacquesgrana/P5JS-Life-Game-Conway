@@ -1,7 +1,7 @@
 
 
 const CELL_SIZE = 10;
-const INFOS_HEIGHT = 100;
+const INFOS_HEIGHT = 120;
 const BOARD_WIDTH = window.innerWidth;
 const BOARD_HEIGHT = window.innerHeight - INFOS_HEIGHT;
 const CELL_MAX_X = Math.floor(BOARD_WIDTH / CELL_SIZE);
@@ -16,8 +16,14 @@ const BOARD_HEIGHT = CELL_MAX_Y * CELL_SIZE;
 
 //const INFOS_HEIGHT = 100;
 const PADDING = 20;
+const LINE_HEIGHT = 60;
+
 const BUTTON_WIDTH = 60;
 const BUTTON_HEIGHT = 30;
+
+const SLIDER_WIDTH = 240;
+const SLIDER_HEIGHT = 20;
+const SLIDER_HANDLER_WIDTH = 20;
 
 const CELL_ALIVE_PROBA_PERCENT = 38;
 

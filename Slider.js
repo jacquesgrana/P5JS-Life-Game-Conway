@@ -22,9 +22,23 @@ class Slider {
    handleStkColor : couleur du contour de la poignée (color)
    sliderStkColor : couleur du contour du slider (color)
    valToReturn : valeur à retourner
+   callback: callback qui prend valToReturn en parametre
    */
-  constructor(posI, posJ, sizeI, sizeJ, handleWidth, minVal, maxVal, startX,
-    sliderBgColor, handleBgColor, strokeColor, strokeColorMouseOver) {
+  constructor(
+  posI, 
+  posJ, 
+  sizeI, 
+  sizeJ, 
+  handleWidth, 
+  minVal, 
+  maxVal, 
+  startX,
+  sliderBgColor, 
+  handleBgColor, 
+  strokeColor, 
+  strokeColorMouseOver,
+  callback
+  ) {
     this.posI = posI;
     this.posJ = posJ;
     this.sizeI = sizeI;
@@ -40,6 +54,7 @@ class Slider {
     this.strokeColor = strokeColor;
     this.strokeColorMouseOver = strokeColorMouseOver;
     this.valToReturn = startX;
+    this.callback = callback;
   }
 
   /**
@@ -91,6 +106,7 @@ class Slider {
         this.handleStkColor = this.strokeColor;
       }
     }
+    this.callback(this.valToReturn);
     return this.valToReturn;
   }
 
