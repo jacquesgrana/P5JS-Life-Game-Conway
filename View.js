@@ -68,10 +68,27 @@ class View {
       true, 
       controller.handleNextButtonClick.bind(controller)
     );
+    
+    this.sliderSimulSpeed = new Slider(
+      PADDING,
+      BOARD_HEIGHT + 2 * PADDING + SLIDER_HEIGHT,
+      SLIDER_WIDTH,
+      SLIDER_HEIGHT,
+      SLIDER_HANDLER_WIDTH,
+      0,
+      10,
+      controller.model.getFrameInterval(),
+      BUTTON_BG_COLOR,
+      BUTTON_BG_COLOR,
+      LINES_COLOR,
+      TEXT_COLOR,
+      controller.handleSpeedSliderModif.bind(controller)
+    );
   }
   
   init() {
     //console.log('view init');
+    this.sliderSimulSpeed.init();
     createCanvas(BOARD_WIDTH, BOARD_HEIGHT + INFOS_HEIGHT);
     background(BG_COLOR);
   }
@@ -112,7 +129,10 @@ class View {
     fill(TEXT_COLOR);
     textSize(16);
     textAlign(LEFT, TOP);
-    text('Génération n° ' + controller.model.getGenCounter(), PADDING, BOARD_HEIGHT + PADDING);
+    //console.log('view : frame interval :', controller.model.getFrameInterval());
+    text('Generation nb : ' + controller.model.getGenCounter() + ' / Delay : ' + controller.model.getFrameInterval(), 
+    PADDING, 
+    BOARD_HEIGHT + PADDING + 5);
    
     this.buttonReset.drawButton();
     this.buttonReset.run();
@@ -122,6 +142,9 @@ class View {
     this.buttonRun.run();
     this.buttonNext.drawButton();
     this.buttonNext.run();
+    
+    this.sliderSimulSpeed.drawSlider();
+    controller.model.setFrameInterval(int(this.sliderSimulSpeed.run()));
   }
   
   /*
@@ -144,7 +167,7 @@ class View {
       this.buttonReset.setIsEnabled(false);
       this.buttonClear.setIsEnabled(false);
       this.buttonNext.setIsEnabled(false);
-      this.buttonRun.setText('Stop');
+      this.buttonRun.setText('Pause');
     }
     else {
       this.buttonReset.setIsEnabled(true);
@@ -155,5 +178,9 @@ class View {
     this.buttonReset.drawButton();
     this.buttonClear.drawButton();
     this.buttonNext.drawButton();
+  }
+  
+  setSliderSimulSpeedValue(value) {
+    this.sliderSimulSpeed.setValToReturn(value);
   }
 }
