@@ -4,6 +4,8 @@ class View {
   constructor(controller) {
     //console.log('view instanciation');
     this.frameCounter = 0;
+    this.isShowHelp = false;
+    this.isSimulWasRunning = false;
     
     this.buttonReset = new Button(
       BOARD_WIDTH - (BUTTON_WIDTH + PADDING), 
@@ -98,6 +100,7 @@ class View {
       BUTTON_BG_COLOR,
       LINES_COLOR,
       TEXT_COLOR,
+      true,
       controller.handleSpeedSliderModif.bind(controller)
     );
     
@@ -114,6 +117,7 @@ class View {
       BUTTON_BG_COLOR,
       LINES_COLOR,
       TEXT_COLOR,
+      true,
       controller.handleProbaSliderModif.bind(controller)
     );
   }
@@ -147,6 +151,8 @@ class View {
     
     this.displayInfos(controller);
     
+    //controller.model.setIsSimulationRunning(!this.isShowHelp && controller.model.getIsSimulationRunning());
+    
     if(controller.model.getIsSimulationRunning()) {
       this.frameCounter++;
       //console.log('counter:', this.frameCounter);
@@ -154,6 +160,14 @@ class View {
         controller.board.generateNext();
         this.frameCounter = 0;
       }
+    }
+    
+    if(this.isShowHelp) {
+      this.displayHelp();
+      this.freeze();
+    }
+    else {
+      this.unFreeze();
     }
     //this.drawLines(CELL_MAX_X, CELL_MAX_Y);
   }
@@ -163,12 +177,10 @@ class View {
     textSize(16);
     textAlign(LEFT, TOP);
     //console.log('view : frame interval :', controller.model.getFrameInterval());
-    text('Generation nb : ' + controller.model.getGenCounter() 
-    + ' / Delay : ' + controller.model.getFrameInterval()
-    + ' / Alive Proba : ' + controller.model.getCellAliveProbaPercent() + '%', 
-    PADDING, 
-    BOARD_HEIGHT + PADDING + 5);
-   
+    text('Generation nb : ' + controller.model.getGenCounter() + ' / Delay : ' + controller.model.getFrameInterval() + ' / Start Alive Proba : ' + controller.model.getCellAliveProbaPercent() + '%', PADDING, BOARD_HEIGHT + PADDING + 5);
+    textSize(12);
+    textAlign(RIGHT, TOP);
+    text('[H or h] : display help menu', BOARD_WIDTH - PADDING, BOARD_HEIGHT + PADDING + LINE_HEIGHT);
     this.buttonReset.drawButton();
     this.buttonReset.run();
     this.buttonClear.drawButton();
@@ -182,9 +194,66 @@ class View {
     
     this.sliderSimulSpeed.drawSlider();
     controller.model.setFrameInterval(int(this.sliderSimulSpeed.run()));
+    //this.sliderSimulSpeed.run()
     
     this.sliderAliveProba.drawSlider();
     controller.model.setCellAliveProbaPercent(int(this.sliderAliveProba.run()));
+    //this.sliderAliveProba.run()
+  }
+  
+  displayHelp() {
+    const textSize01 = 32;
+    const textSize02 = 18;
+    const textSize03 = 14;
+    
+    fill(BG_COLOR);
+    rect(HELP_POS_X, HELP_POS_Y, HELP_WIDTH, HELP_HEIGHT);
+    
+    fill(TEXT_COLOR);
+    
+    textAlign(CENTER, TOP);
+    textSize(textSize01);
+    text('Help Menu' , HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y +  2 * PADDING);
+    
+    textSize(textSize02);
+    text('Keys :' , HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y +  2 * PADDING + LINE_HEIGHT);
+    
+    textSize(textSize03);
+    text('[N] : next generation' , 
+    HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 1.5 * LINE_HEIGHT);
+    text('[R] : run/pause simulation' , 
+    HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 2 * LINE_HEIGHT);
+    text('[H] : show/hide help menu' , 
+    HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 2.5 * LINE_HEIGHT);
+    
+    textSize(textSize02);
+    text('Mouse :' , HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 3.5 * LINE_HEIGHT);
+    
+    textSize(textSize03);
+    text('[Left Click] : change cell state' , 
+    HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 4 * LINE_HEIGHT);
+    
+    textSize(textSize02);
+    text('Buttons :' , HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 5 * LINE_HEIGHT);
+    textSize(textSize03);
+    text('[Next] : next generation' , 
+    HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 5.5 * LINE_HEIGHT);
+    text('[Run] : run/pause simulation' , 
+    HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 6 * LINE_HEIGHT);
+    text('[New] : new simulation without reset' , 
+    HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 6.5 * LINE_HEIGHT);
+    text('[Clear] : new simulation with no alive cells' , 
+    HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 7 * LINE_HEIGHT);
+    text('[Reset] : new simulation with reset' , 
+    HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 7.5 * LINE_HEIGHT);
+    
+    textSize(textSize02);
+    text('Sliders :' , HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 8.5 * LINE_HEIGHT);
+    textSize(textSize03);
+    text('[Left] : modify frame delay' , 
+    HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 9 * LINE_HEIGHT);
+    text('[right] : modify start alive cells proportion' , 
+    HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 9.5 * LINE_HEIGHT);
   }
   
   /*
@@ -200,6 +269,29 @@ class View {
     let xPix = x * CELL_SIZE;
     let yPix = y * CELL_SIZE;
     rect(xPix, yPix, CELL_SIZE, CELL_SIZE);
+  }
+  
+  freeze() {
+    this.buttonReset.setIsEnabled(false);
+    this.buttonClear.setIsEnabled(false);
+    this.buttonNew.setIsEnabled(false);
+    this.buttonNext.setIsEnabled(false);
+    this.buttonRun.setIsEnabled(false);
+    this.buttonRun.setText('Run');
+    
+    this.sliderSimulSpeed.setIsEnabled(false);
+    this.sliderAliveProba.setIsEnabled(false);
+  }
+  
+  unFreeze() {
+    this.buttonReset.setIsEnabled(true);
+    this.buttonClear.setIsEnabled(true);
+    this.buttonNew.setIsEnabled(true);
+    this.buttonNext.setIsEnabled(true);
+    this.buttonRun.setIsEnabled(true);
+    //this.buttonRun.setText('Run');
+    this.sliderSimulSpeed.setIsEnabled(true);
+    this.sliderAliveProba.setIsEnabled(true);
   }
   
   updateButtons(isRunning) {
@@ -229,5 +321,11 @@ class View {
   
   setSliderAliveProbaValue(value) {
     this.sliderAliveProba.setValToReturn(value);
+  }
+  
+  toggleShowHelp() {
+   this.isShowHelp = !this.isShowHelp;
+   //console.log('show help:', this.isShowHelp); 
+   controller.model.setIsSimulationRunning(!this.isShowHelp && controller.model.getIsSimulationRunning());
   }
 }

@@ -6,6 +6,17 @@ const BOARD_WIDTH = window.innerWidth;
 const BOARD_HEIGHT = window.innerHeight - INFOS_HEIGHT;
 const CELL_MAX_X = Math.floor(BOARD_WIDTH / CELL_SIZE);
 const CELL_MAX_Y = Math.floor(BOARD_HEIGHT / CELL_SIZE);
+
+const PADDING = 20;
+const LINE_HEIGHT = 60;
+
+const HELP_POS_X = 2 * PADDING;
+const HELP_POS_Y = 2 * PADDING;
+
+const HELP_WIDTH = BOARD_WIDTH - 4 * PADDING;
+const HELP_HEIGHT = HELP_POS_Y + 2 * PADDING + 10 * LINE_HEIGHT;
+
+
 /*
 const CELL_MAX_X = 100;
 const CELL_MAX_Y = 100;
@@ -15,8 +26,7 @@ const BOARD_HEIGHT = CELL_MAX_Y * CELL_SIZE;
 */
 
 //const INFOS_HEIGHT = 100;
-const PADDING = 20;
-const LINE_HEIGHT = 60;
+
 
 const BUTTON_WIDTH = 60;
 const BUTTON_HEIGHT = 30;

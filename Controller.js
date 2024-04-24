@@ -44,6 +44,7 @@ class Controller {
   
   handleNewButtonClick(isClicked) {
     if(isClicked) {
+      this.model.setGenCounter(0);
       this.board.reset();
     }
   }
@@ -60,12 +61,18 @@ class Controller {
   
   handleClearButtonClick(isClicked) {
     if(isClicked) {
-      this.model.reset();
-      this.board.empty();
-      this.view.setSliderSimulSpeedValue(this.model.getFrameInterval());
+      //this.model.reset();
+      this.model.setCellAliveProbaPercent(0);
+      this.board.reset();
+      //this.view.setSliderSimulSpeedValue(this.model.getFrameInterval());
       this.view.setSliderAliveProbaValue(this.model.getCellAliveProbaPercent());
       //console.log('controller : clear : this.model.getFrameInterval()', this.model.getFrameInterval());
     }
+  }
+  
+  handleHelpKey() {
+    //console.log('help key');
+    this.view.toggleShowHelp();
   }
   
   handleRunKey() {
