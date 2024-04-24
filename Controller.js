@@ -25,6 +25,10 @@ class Controller {
     this.model.setFrameInterval(int(value));
   }
   
+  handleProbaSliderModif(value) {
+    this.model.setCellAliveProbaPercent(int(value));
+  }
+  
   handleRunButtonClick(isClicked) {
     if(isClicked) {
       this.model.setIsSimulationRunning(!this.model.getIsSimulationRunning());
@@ -38,20 +42,28 @@ class Controller {
     }
   }
   
-  handleResetButtonClick(isClicked) {
+  handleNewButtonClick(isClicked) {
     if(isClicked) {
       this.board.reset();
+    }
+  }
+  
+  handleResetButtonClick(isClicked) {
+    if(isClicked) {
       this.model.reset();
+      this.board.reset();
       this.view.setSliderSimulSpeedValue(this.model.getFrameInterval());
+      this.view.setSliderAliveProbaValue(this.model.getCellAliveProbaPercent());
       //console.log('controller : reset : this.model.getFrameInterval()', this.model.getFrameInterval());
     }
   }
   
   handleClearButtonClick(isClicked) {
     if(isClicked) {
-      this.board.empty();
       this.model.reset();
+      this.board.empty();
       this.view.setSliderSimulSpeedValue(this.model.getFrameInterval());
+      this.view.setSliderAliveProbaValue(this.model.getCellAliveProbaPercent());
       //console.log('controller : clear : this.model.getFrameInterval()', this.model.getFrameInterval());
     }
   }
