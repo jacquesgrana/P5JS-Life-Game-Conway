@@ -37,8 +37,24 @@ class View {
       controller.handleClearButtonClick.bind(controller)
     );
     
-    this.buttonRun = new Button(
+    this.buttonNew = new Button(
       BOARD_WIDTH - 3 * (BUTTON_WIDTH + PADDING), 
+      BOARD_HEIGHT + PADDING, 
+      BUTTON_WIDTH, 
+      BUTTON_HEIGHT, 
+      'New', 
+      BUTTON_BG_COLOR, 
+      LINES_COLOR, 
+      LINES_COLOR, 
+      TEXT_COLOR, 
+      BUTTON_BG_HOVER_COLOR, 
+      BUTTON_BG_DISABLED_COLOR, 
+      true, 
+      controller.handleNewButtonClick.bind(controller)
+    );
+    
+    this.buttonRun = new Button(
+      BOARD_WIDTH - 4 * (BUTTON_WIDTH + PADDING), 
       BOARD_HEIGHT + PADDING, 
       BUTTON_WIDTH, 
       BUTTON_HEIGHT, 
@@ -54,7 +70,7 @@ class View {
     );
     
     this.buttonNext = new Button(
-      BOARD_WIDTH - 4 * (BUTTON_WIDTH + PADDING), 
+      BOARD_WIDTH - 5 * (BUTTON_WIDTH + PADDING), 
       BOARD_HEIGHT + PADDING, 
       BUTTON_WIDTH, 
       BUTTON_HEIGHT, 
@@ -71,7 +87,7 @@ class View {
     
     this.sliderSimulSpeed = new Slider(
       PADDING,
-      BOARD_HEIGHT + 2 * PADDING + SLIDER_HEIGHT,
+      BOARD_HEIGHT + 2 * PADDING + SLIDER_HEIGHT + 10,
       SLIDER_WIDTH,
       SLIDER_HEIGHT,
       SLIDER_HANDLER_WIDTH,
@@ -84,11 +100,28 @@ class View {
       TEXT_COLOR,
       controller.handleSpeedSliderModif.bind(controller)
     );
+    
+   this.sliderAliveProba = new Slider(
+      SLIDER_WIDTH + 2 * PADDING,
+      BOARD_HEIGHT + 2 * PADDING + SLIDER_HEIGHT + 10,
+      SLIDER_WIDTH,
+      SLIDER_HEIGHT,
+      SLIDER_HANDLER_WIDTH,
+      0,
+      100,
+      controller.model.getCellAliveProbaPercent(),
+      BUTTON_BG_COLOR,
+      BUTTON_BG_COLOR,
+      LINES_COLOR,
+      TEXT_COLOR,
+      controller.handleProbaSliderModif.bind(controller)
+    );
   }
   
   init() {
     //console.log('view init');
     this.sliderSimulSpeed.init();
+    this.sliderAliveProba.init();
     createCanvas(BOARD_WIDTH, BOARD_HEIGHT + INFOS_HEIGHT);
     background(BG_COLOR);
   }
@@ -130,7 +163,9 @@ class View {
     textSize(16);
     textAlign(LEFT, TOP);
     //console.log('view : frame interval :', controller.model.getFrameInterval());
-    text('Generation nb : ' + controller.model.getGenCounter() + ' / Delay : ' + controller.model.getFrameInterval(), 
+    text('Generation nb : ' + controller.model.getGenCounter() 
+    + ' / Delay : ' + controller.model.getFrameInterval()
+    + ' / Alive Proba : ' + controller.model.getCellAliveProbaPercent() + '%', 
     PADDING, 
     BOARD_HEIGHT + PADDING + 5);
    
@@ -138,6 +173,8 @@ class View {
     this.buttonReset.run();
     this.buttonClear.drawButton();
     this.buttonClear.run();
+    this.buttonNew.drawButton();
+    this.buttonNew.run();
     this.buttonRun.drawButton();
     this.buttonRun.run();
     this.buttonNext.drawButton();
@@ -145,6 +182,9 @@ class View {
     
     this.sliderSimulSpeed.drawSlider();
     controller.model.setFrameInterval(int(this.sliderSimulSpeed.run()));
+    
+    this.sliderAliveProba.drawSlider();
+    controller.model.setCellAliveProbaPercent(int(this.sliderAliveProba.run()));
   }
   
   /*
@@ -166,21 +206,28 @@ class View {
     if(isRunning) {
       this.buttonReset.setIsEnabled(false);
       this.buttonClear.setIsEnabled(false);
+      this.buttonNew.setIsEnabled(false);
       this.buttonNext.setIsEnabled(false);
       this.buttonRun.setText('Pause');
     }
     else {
       this.buttonReset.setIsEnabled(true);
       this.buttonClear.setIsEnabled(true);
+      this.buttonNew.setIsEnabled(true);
       this.buttonNext.setIsEnabled(true);
       this.buttonRun.setText('Run');
     }
     this.buttonReset.drawButton();
     this.buttonClear.drawButton();
+    this.buttonNew.drawButton();
     this.buttonNext.drawButton();
   }
   
   setSliderSimulSpeedValue(value) {
     this.sliderSimulSpeed.setValToReturn(value);
+  }
+  
+  setSliderAliveProbaValue(value) {
+    this.sliderAliveProba.setValToReturn(value);
   }
 }
