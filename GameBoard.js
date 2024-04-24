@@ -25,6 +25,7 @@ class GameBoard {
   }
   
   // TODO faire fonction
+  /*
   empty() {
     let cells = new Array(this.width);
     for (let x = 0; x < this.width; x++) {
@@ -36,6 +37,7 @@ class GameBoard {
     }
     this.cells = cells;
   }
+  */
   
   reset() {
     this.cells = this.initCells(this.model);

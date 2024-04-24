@@ -22,6 +22,7 @@ class Slider {
    handleStkColor : couleur du contour de la poignée (color)
    sliderStkColor : couleur du contour du slider (color)
    valToReturn : valeur à retourner
+   isEnabled : vrai si activé
    callback: callback qui prend valToReturn en parametre
    */
   constructor(
@@ -37,6 +38,7 @@ class Slider {
   handleBgColor, 
   strokeColor, 
   strokeColorMouseOver,
+  isEnabled,
   callback
   ) {
     this.posI = posI;
@@ -54,6 +56,7 @@ class Slider {
     this.strokeColor = strokeColor;
     this.strokeColorMouseOver = strokeColorMouseOver;
     this.valToReturn = startX;
+    this.isEnabled = isEnabled;
     this.callback = callback;
   }
 
@@ -86,28 +89,39 @@ class Slider {
   Procédure qui active l'écoute des evenements de la souris dans le slider
   */
   run() {
-    // gestion de la souris
-    if (mouseX > (this.posI - this.gapI) && mouseX < (this.posI + this.sizeI + this.gapI)) {
-      if (mouseY > this.posJ && mouseY < this.posJ + this.sizeJ) {
-        this.sliderStkColor = this.strokeColorMouseOver;
-        this.handleStkColor = this.strokeColorMouseOver;
-        if (mouseIsPressed) {
-          this.valToReturn = map(mouseX, this.posI, this.posI + this.sizeI, this.minVal, this.maxVal);
-          if (this.valToReturn < this.minVal) {
-            this.valToReturn = this.minVal;
-          } else if (this.valToReturn > this.maxVal) {
-            this.valToReturn = this.maxVal;
-          }
+    
+    if(this.isEnabled) {
+      // gestion de la souris
+      if (mouseX > (this.posI - this.gapI) 
+      && mouseX < (this.posI + this.sizeI + this.gapI) 
+      && mouseY > this.posJ 
+      && mouseY < this.posJ + this.sizeJ) {
+          this.sliderStkColor = this.strokeColorMouseOver;
           this.handleStkColor = this.strokeColorMouseOver;
+          if (mouseIsPressed) {
+            this.valToReturn = map(mouseX, this.posI, this.posI + this.sizeI, this.minVal, this.maxVal);
+            if (this.valToReturn < this.minVal) {
+              this.valToReturn = this.minVal;
+            } else if (this.valToReturn > this.maxVal) {
+              this.valToReturn = this.maxVal;
+            }
+            this.handleStkColor = this.strokeColorMouseOver;
+            this.sliderStkColor = this.strokeColor;
+          }
+        } else {
           this.sliderStkColor = this.strokeColor;
+          this.handleStkColor = this.strokeColor;
         }
-      } else {
-        this.sliderStkColor = this.strokeColor;
-        this.handleStkColor = this.strokeColor;
+      
+      this.callback(this.valToReturn);
+      //return this.valToReturn;
       }
-    }
-    this.callback(this.valToReturn);
-    return this.valToReturn;
+      else {
+        // TODO améliorer ************************************************************************ introduire une proprieté
+        this.sliderBgColor = BG_COLOR;
+      }
+      return this.valToReturn;
+    
   }
 
   /**
@@ -119,5 +133,9 @@ class Slider {
 
   setValToReturn(valToReturn) {
     this.valToReturn = valToReturn;
+  }
+  
+  setIsEnabled(value) {
+    this.isEnabled = value;
   }
 }
