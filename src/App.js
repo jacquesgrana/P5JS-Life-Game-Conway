@@ -44,4 +44,8 @@ function keyTyped() {
   if (key === 'H' || key === 'h') {
     controller.handleHelpKey();
   }
+
+  if (key === 'F' || key === 'f') {
+    controller.handleFiguresKey();
+  }
 }

@@ -5,7 +5,9 @@ class View {
     //console.log('view instanciation');
     this.frameCounter = 0;
     this.isShowHelp = false;
-    this.isSimulWasRunning = false;
+    this.isShowFigures = false;
+    //this.isDropFigure = false; 
+    //this.isSimulWasRunning = false;
     
     this.buttonReset = new Button(
       BOARD_WIDTH - (BUTTON_WIDTH + PADDING), 
@@ -86,6 +88,22 @@ class View {
       true, 
       controller.handleNextButtonClick.bind(controller)
     );
+
+    this.buttonFiguresGlider = new Button(
+      HELP_POS_X + HELP_WIDTH/2 - BUTTON_WIDTH/2,
+      HELP_POS_Y + 2 * PADDING + 3.5 * LINE_HEIGHT,
+      BUTTON_WIDTH,
+      BUTTON_HEIGHT,
+      'Glider',
+      BUTTON_BG_COLOR,
+      LINES_COLOR,
+      LINES_COLOR,
+      TEXT_COLOR,
+      BUTTON_BG_HOVER_COLOR,
+      BUTTON_BG_DISABLED_COLOR,
+      true,
+      controller.handleGliderButtonClick.bind(controller)
+    )
     
     this.sliderSimulSpeed = new Slider(
       PADDING,
@@ -166,8 +184,17 @@ class View {
       this.displayHelp();
       this.freeze();
     }
+    else if(this.isShowFigures) {
+      this.displayFigures(controller);
+      this.freeze();
+    }
+    //
+    else if(controller.model.getIsSelectedFigure()) {
+      this.displayDropFigure(controller);
+      this.freeze();
+    }
     else {
-      this.unFreeze();
+      this.updateButtons(controller.model.getIsSimulationRunning());
     }
     //this.drawLines(CELL_MAX_X, CELL_MAX_Y);
   }
@@ -180,7 +207,7 @@ class View {
     text('Generation nb : ' + controller.model.getGenCounter() + ' / Delay : ' + controller.model.getFrameInterval() + ' / Start Alive Proba : ' + controller.model.getCellAliveProbaPercent() + '%', PADDING, BOARD_HEIGHT + PADDING + 5);
     textSize(12);
     textAlign(RIGHT, TOP);
-    text('[H or h] : display help menu', BOARD_WIDTH - PADDING, BOARD_HEIGHT + PADDING + LINE_HEIGHT);
+    text('[H] : help menu / [F] : figure menu', BOARD_WIDTH - PADDING, BOARD_HEIGHT + PADDING + LINE_HEIGHT);
     this.buttonReset.drawButton();
     this.buttonReset.run();
     this.buttonClear.drawButton();
@@ -200,12 +227,39 @@ class View {
     controller.model.setCellAliveProbaPercent(int(this.sliderAliveProba.run()));
     //this.sliderAliveProba.run()
   }
+
+  displayDropFigure(controller) {
+    //this.buttonFiguresGlider.drawButton();
+    //console.log('figures :', controller.model.getFigures());
+    //fill(BG_COLOR);
+    //rect(HELP_POS_X, HELP_POS_Y, HELP_WIDTH, HELP_HEIGHT);
+    this.drawDropFigure(controller.model.getSelectedFigure());
+  }
+
+  displayFigures(controller) {
+    //console.log('figures :', controller.model.getFigures());
+    const textSize01 = 32;
+    const textSize02 = 18;
+    const textSize03 = 14;
+
+    fill(BG_COLOR);
+    rect(HELP_POS_X, HELP_POS_Y, HELP_WIDTH, HELP_HEIGHT);
+
+    fill(TEXT_COLOR);
+    
+    textAlign(CENTER, TOP);
+    textSize(textSize01);
+    text('Figures Menu' , HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y +  2 * PADDING);
+
+    this.buttonFiguresGlider.drawButton();
+    this.buttonFiguresGlider.run();
+  }
   
   displayHelp() {
     const textSize01 = 32;
     const textSize02 = 18;
     const textSize03 = 14;
-    
+    //const helpWindowWidth = HELP_WIDTH >= 400 ? 400 : HELP_WIDTH;
     fill(BG_COLOR);
     rect(HELP_POS_X, HELP_POS_Y, HELP_WIDTH, HELP_HEIGHT);
     
@@ -270,6 +324,30 @@ class View {
     let yPix = y * CELL_SIZE;
     rect(xPix, yPix, CELL_SIZE, CELL_SIZE);
   }
+
+  drawDropFigure(figure) {
+    strokeWeight(CELL_STROKE_WEIGHT);
+    stroke(TEXT_COLOR);
+    noFill();
+    //fill(TEXT_COLOR);
+
+    //console.log('draw figure :', figure);
+    const zoneWidth = (figure.width + 6) * CELL_SIZE;
+    const zoneHeight = (figure.height + 6) * CELL_SIZE;
+    const figureWidth = figure.width * CELL_SIZE;
+    const figureHeight = figure.height * CELL_SIZE;
+    //console.log('zone :', zoneWidth, zoneHeight);
+    if(
+      mouseX > (zoneWidth / 2) 
+      && mouseY > (zoneHeight / 2)
+      && mouseX < (BOARD_WIDTH - (zoneWidth / 2))
+      && mouseY < (BOARD_HEIGHT - (zoneHeight / 2))
+    ) {
+      rect(mouseX - (zoneWidth / 2), mouseY - (zoneHeight / 2), zoneWidth, zoneHeight);
+      stroke(DANGER_COLOR);
+      rect(mouseX - (figureWidth / 2), mouseY - (figureHeight / 2), figureWidth, figureHeight);
+    }
+  }
   
   freeze() {
     this.buttonReset.setIsEnabled(false);
@@ -295,12 +373,15 @@ class View {
   }
   
   updateButtons(isRunning) {
+    this.buttonRun.setIsEnabled(true);
     if(isRunning) {
       this.buttonReset.setIsEnabled(false);
       this.buttonClear.setIsEnabled(false);
       this.buttonNew.setIsEnabled(false);
       this.buttonNext.setIsEnabled(false);
       this.buttonRun.setText('Pause');
+      this.sliderSimulSpeed.setIsEnabled(false);
+      this.sliderAliveProba.setIsEnabled(false);
     }
     else {
       this.buttonReset.setIsEnabled(true);
@@ -308,11 +389,14 @@ class View {
       this.buttonNew.setIsEnabled(true);
       this.buttonNext.setIsEnabled(true);
       this.buttonRun.setText('Run');
+      this.sliderSimulSpeed.setIsEnabled(true);
+      this.sliderAliveProba.setIsEnabled(true);
     }
     this.buttonReset.drawButton();
     this.buttonClear.drawButton();
     this.buttonNew.drawButton();
     this.buttonNext.drawButton();
+    this.buttonRun.drawButton();
   }
   
   setSliderSimulSpeedValue(value) {
@@ -325,7 +409,28 @@ class View {
   
   toggleShowHelp() {
    this.isShowHelp = !this.isShowHelp;
+   this.isShowFigures = false;
+   controller.model.setIsSelectedFigure(false);
+   //this.isDropFigure = false;
    //console.log('show help:', this.isShowHelp); 
    controller.model.setIsSimulationRunning(!this.isShowHelp && controller.model.getIsSimulationRunning());
+  }
+
+  toggleShowFigures() {
+    this.isShowFigures = !this.isShowFigures;
+    this.isShowHelp = false;
+    controller.model.setIsSelectedFigure(false);
+    //this.isDropFigure = false;
+    //console.log('show figures:', this.isShowFigures);
+    controller.model.setIsSimulationRunning(!this.isShowFigures && controller.model.getIsSimulationRunning());
+  }
+
+  toggleDropFigure() {
+    //this.isDropFigure = !this.isDropFigure;
+    controller.model.setIsSelectedFigure(!controller.model.getIsSelectedFigure());
+
+    this.isShowFigures = false;
+    this.isShowHelp = false;
+    controller.model.setIsSimulationRunning(!controller.model.getIsSelectedFigure() && controller.model.getIsSimulationRunning());
   }
 }

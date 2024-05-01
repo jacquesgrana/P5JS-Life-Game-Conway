@@ -6,13 +6,21 @@ class Controller {
     initConfigColors();
     this.model = new Model();
     this.view = new View(this);
-    this.board = new GameBoard(CELL_MAX_X, CELL_MAX_Y, this.model);
+    this.board = new BoardManager(CELL_MAX_X, CELL_MAX_Y, this.model);
+    this.jsonManager = new JsonManager(this);
+    // TODO améliorer
+    this.clickDropFigureCounter = 0;
   }
   
   init() {
     //console.log('manager init');
     this.model.init();
     this.view.init();
+    const fct = async () => {
+      await this.jsonManager.init();
+      //console.log('figuresData :', this.jsonManager.getFiguresData());
+    }
+    fct();
   }
   
   run() {
@@ -27,6 +35,18 @@ class Controller {
   
   handleProbaSliderModif(value) {
     this.model.setCellAliveProbaPercent(int(value));
+  }
+
+  handleGliderButtonClick(isClicked) {
+    if(isClicked) {
+      // fermer la fenetre des figures et freeze les boutons
+      // set la choosenFigure sur glider
+      this.model.setSelectedFigure(this.model.getFigures()[0]);
+      // set le booleen de la vue de dropFigure sur true
+      this.view.toggleDropFigure();
+      this.clickDropFigureCounter = 0;
+      //console.log('glider : ', this.model.getSelectedFigure());
+    }
   }
   
   handleRunButtonClick(isClicked) {
@@ -74,6 +94,11 @@ class Controller {
     //console.log('help key');
     this.view.toggleShowHelp();
   }
+
+  handleFiguresKey() {
+    //console.log('figures key');
+    this.view.toggleShowFigures();
+  }
   
   handleRunKey() {
     this.model.setIsSimulationRunning(!this.model.getIsSimulationRunning());
@@ -83,25 +108,46 @@ class Controller {
   handleNextKey() {
    //console.log('controller : next'); 
    this.board.generateNext();
-   //this.view.displayInfos(this.board);
   }
   
   handleLeftClick(mx, my) {
-   //console.log('clic gauche controller'); 
-   if(mx >= 0 
-   && mx <= BOARD_WIDTH 
-   && my >= 0 
-   && my <= BOARD_HEIGHT
-   && !this.model.getIsSimulationRunning()
-   ) {
-     const x = Math.floor(mx / CELL_SIZE);
-     const y = Math.floor(my / CELL_SIZE);
-     //console.log('x:', x, 'y:', y);
-     this.board.toggleCellState(x, y);
+   if(this.model.getIsSelectedFigure()) {
+    if(this.clickDropFigureCounter > 0) {
+      //console.log('drop figure');
+      // TODO appeler methode de board pour ajouter la figure
+      //const xCenter = Math.floor(mx / CELL_SIZE);
+      //const yCenter = Math.floor(my / CELL_SIZE);
+      const figureWidth = (this.model.getSelectedFigure().width + 6) * CELL_SIZE;
+      const figureHeight = (this.model.getSelectedFigure().height + 6) * CELL_SIZE;
+      //console.log('figure :', figureWidth, figureHeight);
+      const x = int((mx - figureWidth / 2) / CELL_SIZE);
+      const y = int((my - figureHeight / 2) / CELL_SIZE);
+      this.board.dropFigure(x, y, this.model.getSelectedFigure());
+      // TODO toggle la view de dropFigure
+      this.view.toggleDropFigure();
+      this.clickDropFigureCounter = 0;
+    }
+    else {
+      this.clickDropFigureCounter++;
+    }
    }
    else {
-     //console.log('clic out board');
+    if(mx >= 0 
+    && mx <= BOARD_WIDTH 
+    && my >= 0 
+    && my <= BOARD_HEIGHT
+    && !this.model.getIsSimulationRunning()
+    ) {
+      const x = Math.floor(mx / CELL_SIZE);
+      const y = Math.floor(my / CELL_SIZE);
+      //console.log('x:', x, 'y:', y);
+      this.board.toggleCellState(x, y);
+    }
+    else {
+      //console.log('clic out board');
+    }
    }
+   
 
   }
   
