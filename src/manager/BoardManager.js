@@ -53,12 +53,13 @@ class BoardManager {
       }
     }
 
-    //console.log('datas:', figure.datas);
+    console.log('datas:', figure.datas);
     for (let i= x + 3; i < x + figure.width + 3; i++) {
       for (let j= y + 3; j < y + figure.height + 3; j++) {
         const ii = i - 3 - x;
         const jj = j - 3 - y;
-        
+        //console.log('i:', i, 'j:', j, 'ii:', ii, 'jj:', jj);
+        //if(ii === 4) console.log(figure.datas[ii]);
         if(figure.datas[ii][jj] === 1) {
           this.cells[i][j].setState(true);
         }

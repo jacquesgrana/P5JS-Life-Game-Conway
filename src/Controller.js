@@ -48,6 +48,18 @@ class Controller {
       //console.log('glider : ', this.model.getSelectedFigure());
     }
   }
+
+  handleLWSSButtonClick(isClicked) {
+    if(isClicked) {
+      // fermer la fenetre des figures et freeze les boutons
+      // set la choosenFigure sur glider
+      this.model.setSelectedFigure(this.model.getFigures()[1]);
+      // set le booleen de la vue de dropFigure sur true
+      this.view.toggleDropFigure();
+      this.clickDropFigureCounter = 0;
+      //console.log('glider : ', this.model.getSelectedFigure());
+    }
+  }
   
   handleRunButtonClick(isClicked) {
     if(isClicked) {

@@ -91,7 +91,7 @@ class View {
 
     this.buttonFiguresGlider = new Button(
       HELP_POS_X + HELP_WIDTH/2 - BUTTON_WIDTH/2,
-      HELP_POS_Y + 2 * PADDING + 3.5 * LINE_HEIGHT,
+      HELP_POS_Y + 2 * PADDING + LINE_HEIGHT,
       BUTTON_WIDTH,
       BUTTON_HEIGHT,
       'Glider',
@@ -104,6 +104,24 @@ class View {
       true,
       controller.handleGliderButtonClick.bind(controller)
     )
+
+    this.buttonFiguresLWSS = new Button(
+      HELP_POS_X + HELP_WIDTH/2 - BUTTON_WIDTH/2,
+      HELP_POS_Y + 2 * PADDING + 2 * LINE_HEIGHT,
+      BUTTON_WIDTH,
+      BUTTON_HEIGHT,
+      'LWSS',
+      BUTTON_BG_COLOR,
+      LINES_COLOR,
+      LINES_COLOR,
+      TEXT_COLOR,
+      BUTTON_BG_HOVER_COLOR,
+      BUTTON_BG_DISABLED_COLOR,
+      true,
+      controller.handleLWSSButtonClick.bind(controller)
+    )
+
+    //handleLWSSButtonClick
     
     this.sliderSimulSpeed = new Slider(
       PADDING,
@@ -253,6 +271,8 @@ class View {
 
     this.buttonFiguresGlider.drawButton();
     this.buttonFiguresGlider.run();
+    this.buttonFiguresLWSS.drawButton();
+    this.buttonFiguresLWSS.run();
   }
   
   displayHelp() {
