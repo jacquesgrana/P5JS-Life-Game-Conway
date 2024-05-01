@@ -1,4 +1,7 @@
-const FIGURES_JSON_PATH = './../../json/figures.json';
+//const FIGURES_JSON_PATH = './../../json/figures.json';
+const FIGURES_JSON_PATH = 'https://jacquesgrana.github.io/P5JS-Life-Game-Conway/json/figures.json';
+
+//https://jacquesgrana.github.io/P5JS-Life-Game-Conway/json/figures.json
 
 const CELL_SIZE = 10;
 const INFOS_HEIGHT = 120;
