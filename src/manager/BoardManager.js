@@ -53,7 +53,7 @@ class BoardManager {
       }
     }
 
-    console.log('datas:', figure.datas);
+    //console.log('datas:', figure.datas);
     for (let i= x + 3; i < x + figure.width + 3; i++) {
       for (let j= y + 3; j < y + figure.height + 3; j++) {
         const ii = i - 3 - x;
