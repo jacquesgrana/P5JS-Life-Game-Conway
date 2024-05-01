@@ -3,9 +3,12 @@ class Model {
   constructor() {
     //console.log('model instanciation');
     this.isSimulationRunning = false;
+    this.isSelectedFigure = false;
     this.genCounter = 0;
     this.cellAliveProbaPercent = CELL_ALIVE_PROBA_PERCENT;
     this.frameInterval = int(FRAME_COUNT);
+    this.figures = [];
+    this.selectedFigure = {};
   }
   
   init() {
@@ -36,6 +39,19 @@ class Model {
   setFrameInterval(frameInterval) {
     this.frameInterval = frameInterval;
   }
+
+  setFigures(figures) {
+    this.figures = figures;
+    //console.log('figures :', this.figures);
+  }
+
+  setSelectedFigure(figure) {
+    this.selectedFigure = figure;
+  }
+
+  setIsSelectedFigure(isSelected) {
+    this.isSelectedFigure = isSelected;
+  }
   
   getIsSimulationRunning() {
     return this.isSimulationRunning;
@@ -51,5 +67,17 @@ class Model {
   
   getFrameInterval() {
     return this.frameInterval; 
+  }
+
+  getFigures() {
+    return this.figures;
+  }
+
+  getSelectedFigure() {
+    return this.selectedFigure;
+  }
+
+  getIsSelectedFigure() {
+    return this.isSelectedFigure;
   }
 }

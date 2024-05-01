@@ -1,4 +1,4 @@
-class GameBoard {
+class BoardManager {
  
   constructor(width, height, model) {
     this.width = width;
@@ -41,6 +41,30 @@ class GameBoard {
   
   reset() {
     this.cells = this.initCells(this.model);
+  }
+
+  dropFigure(x, y, figure) {
+    // TODO ajouter la figure dans le tableau
+    //console.log('x:', x, 'y:', y, 'figure name:', figure.name);
+
+    for (let i= x; i < x + figure.width + 6; i++) {
+      for (let j= y; j < y + figure.height + 6; j++) {
+        this.cells[i][j].setState(false);
+      }
+    }
+
+    //console.log('datas:', figure.datas);
+    for (let i= x + 3; i < x + figure.width + 3; i++) {
+      for (let j= y + 3; j < y + figure.height + 3; j++) {
+        const ii = i - 3 - x;
+        const jj = j - 3 - y;
+        
+        if(figure.datas[ii][jj] === 1) {
+          this.cells[i][j].setState(true);
+        }
+      }
+    }
+
   }
   
   generateNext() {
