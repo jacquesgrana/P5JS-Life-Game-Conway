@@ -217,6 +217,22 @@ class View {
       controller.handleClockButtonClick.bind(controller)
     )
 
+    this.buttonFiguresGosperGlider = new Button(
+      HELP_POS_X + HELP_WIDTH/2 - BUTTON_WIDTH * 2 - 1.5 * PADDING,
+      HELP_POS_Y + 2 * PADDING + 4.5 * LINE_HEIGHT,
+      BUTTON_WIDTH,
+      BUTTON_HEIGHT,
+      'Gosper',
+      BUTTON_BG_COLOR,
+      LINES_COLOR,
+      LINES_COLOR,
+      TEXT_COLOR,
+      BUTTON_BG_HOVER_COLOR,
+      BUTTON_BG_DISABLED_COLOR,
+      true,
+      controller.handleGosperGliderButtonClick.bind(controller)
+    )
+
     //handleLWSSButtonClick
     
     this.sliderSimulSpeed = new Slider(
@@ -368,6 +384,7 @@ class View {
     textSize(textSize02);
     text('Spaceships' , HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y +  2 * PADDING + LINE_HEIGHT);
     text('Oscillators' , HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y +  2 * PADDING + 2.5 * LINE_HEIGHT);
+    text('Guns' , HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y +  2 * PADDING + 4 * LINE_HEIGHT);
 
     this.buttonFiguresGlider.drawButton();
     this.buttonFiguresGlider.run();
@@ -385,6 +402,8 @@ class View {
     this.buttonFiguresPentadeca.run();
     this.buttonFiguresClock.drawButton();
     this.buttonFiguresClock.run();
+    this.buttonFiguresGosperGlider.drawButton();
+    this.buttonFiguresGosperGlider.run();
   }
   
   displayHelp() {
@@ -466,8 +485,8 @@ class View {
     //fill(TEXT_COLOR);
 
     //console.log('draw figure :', figure);
-    const zoneWidth = (figure.width + 6) * CELL_SIZE;
-    const zoneHeight = (figure.height + 6) * CELL_SIZE;
+    const zoneWidth = (figure.width + 2 * DROP_FIGURE_PADDING) * CELL_SIZE;
+    const zoneHeight = (figure.height + 2 * DROP_FIGURE_PADDING) * CELL_SIZE;
     const figureWidth = figure.width * CELL_SIZE;
     const figureHeight = figure.height * CELL_SIZE;
     //console.log('zone :', zoneWidth, zoneHeight);

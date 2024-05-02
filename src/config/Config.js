@@ -45,6 +45,8 @@ const CELL_ALIVE_PROBA_PERCENT = 38;
 
 const FRAME_COUNT = 4;
 
+const DROP_FIGURE_PADDING = 3;
+
 const CELL_STROKE_WEIGHT = 1;
 
 var BG_COLOR;
