@@ -1,8 +1,9 @@
 //const FIGURES_JSON_PATH = './../../json/figures.json';
-const FIGURES_JSON_PATH = 'https://jacquesgrana.github.io/P5JS-Life-Game-Conway/json/figures.json';
+//const FIGURES_JSON_PATH = 'https://jacquesgrana.github.io/P5JS-Life-Game-Conway/json/figures.json';
 let currentURL = window.location.href;
 let basePath = currentURL.substring(0, currentURL.lastIndexOf('/') + 1);
-//const FIGURES_JSON_PATH = basePath + './../../json/figures.json';
+const FIGURES_JSON_PATH = basePath + 'json/figures.json';
+console.log('FIGURES_JSON_PATH:', FIGURES_JSON_PATH);
 
 const CELL_SIZE = 10;
 const INFOS_HEIGHT = 120;
