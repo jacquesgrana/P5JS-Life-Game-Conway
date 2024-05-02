@@ -153,6 +153,70 @@ class View {
       controller.handleHWSSButtonClick.bind(controller)
     )
 
+    this.buttonFiguresCross = new Button(
+      HELP_POS_X + HELP_WIDTH/2 - BUTTON_WIDTH * 2 - 1.5 * PADDING,
+      HELP_POS_Y + 2 * PADDING + 3 * LINE_HEIGHT,
+      BUTTON_WIDTH,
+      BUTTON_HEIGHT,
+      'Cross',
+      BUTTON_BG_COLOR,
+      LINES_COLOR,
+      LINES_COLOR,
+      TEXT_COLOR,
+      BUTTON_BG_HOVER_COLOR,
+      BUTTON_BG_DISABLED_COLOR,
+      true,
+      controller.handleCrossButtonClick.bind(controller)
+    )
+
+    this.buttonFiguresPulsar = new Button(
+      HELP_POS_X + HELP_WIDTH/2 - BUTTON_WIDTH * 1 - 0.5 * PADDING,
+      HELP_POS_Y + 2 * PADDING + 3 * LINE_HEIGHT,
+      BUTTON_WIDTH,
+      BUTTON_HEIGHT,
+      'Pulsar',
+      BUTTON_BG_COLOR,
+      LINES_COLOR,
+      LINES_COLOR,
+      TEXT_COLOR,
+      BUTTON_BG_HOVER_COLOR,
+      BUTTON_BG_DISABLED_COLOR,
+      true,
+      controller.handlePulsarButtonClick.bind(controller)
+    )
+
+    this.buttonFiguresPentadeca = new Button(
+      HELP_POS_X + HELP_WIDTH/2  + 0.5 * PADDING,
+      HELP_POS_Y + 2 * PADDING + 3 * LINE_HEIGHT,
+      BUTTON_WIDTH,
+      BUTTON_HEIGHT,
+      'Penta',
+      BUTTON_BG_COLOR,
+      LINES_COLOR,
+      LINES_COLOR,
+      TEXT_COLOR,
+      BUTTON_BG_HOVER_COLOR,
+      BUTTON_BG_DISABLED_COLOR,
+      true,
+      controller.handlePentadecaButtonClick.bind(controller)
+    )
+
+    this.buttonFiguresClock = new Button(
+      HELP_POS_X + HELP_WIDTH/2 + BUTTON_WIDTH + 1.5 * PADDING,
+      HELP_POS_Y + 2 * PADDING + 3 * LINE_HEIGHT,
+      BUTTON_WIDTH,
+      BUTTON_HEIGHT,
+      'Clock',
+      BUTTON_BG_COLOR,
+      LINES_COLOR,
+      LINES_COLOR,
+      TEXT_COLOR,
+      BUTTON_BG_HOVER_COLOR,
+      BUTTON_BG_DISABLED_COLOR,
+      true,
+      controller.handleClockButtonClick.bind(controller)
+    )
+
     //handleLWSSButtonClick
     
     this.sliderSimulSpeed = new Slider(
@@ -303,6 +367,7 @@ class View {
 
     textSize(textSize02);
     text('Spaceships' , HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y +  2 * PADDING + LINE_HEIGHT);
+    text('Oscillators' , HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y +  2 * PADDING + 2.5 * LINE_HEIGHT);
 
     this.buttonFiguresGlider.drawButton();
     this.buttonFiguresGlider.run();
@@ -312,6 +377,14 @@ class View {
     this.buttonFiguresMWSS.run();
     this.buttonFiguresHWSS.drawButton();
     this.buttonFiguresHWSS.run();
+    this.buttonFiguresCross.drawButton();
+    this.buttonFiguresCross.run();
+    this.buttonFiguresPulsar.drawButton();
+    this.buttonFiguresPulsar.run();
+    this.buttonFiguresPentadeca.drawButton();
+    this.buttonFiguresPentadeca.run();
+    this.buttonFiguresClock.drawButton();
+    this.buttonFiguresClock.run();
   }
   
   displayHelp() {

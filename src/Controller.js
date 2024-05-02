@@ -72,6 +72,38 @@ class Controller {
       this.clickDropFigureCounter = 0;
     }
   }
+
+  handleCrossButtonClick(isClicked) {
+    if(isClicked) {
+      this.model.setSelectedFigure(this.model.getFigures()[4]);
+      this.view.toggleDropFigure();
+      this.clickDropFigureCounter = 0;
+    }
+  }
+
+  handlePulsarButtonClick(isClicked) {
+    if(isClicked) {
+      this.model.setSelectedFigure(this.model.getFigures()[5]);
+      this.view.toggleDropFigure();
+      this.clickDropFigureCounter = 0;
+    }
+  }
+
+  handlePentadecaButtonClick(isClicked) {
+    if(isClicked) {
+      this.model.setSelectedFigure(this.model.getFigures()[6]);
+      this.view.toggleDropFigure();
+      this.clickDropFigureCounter = 0;
+    }
+  }
+
+  handleClockButtonClick(isClicked) {
+    if(isClicked) {
+      this.model.setSelectedFigure(this.model.getFigures()[7]);
+      this.view.toggleDropFigure();
+      this.clickDropFigureCounter = 0;
+    }
+  }
   
   handleRunButtonClick(isClicked) {
     if(isClicked) {
