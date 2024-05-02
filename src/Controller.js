@@ -104,6 +104,14 @@ class Controller {
       this.clickDropFigureCounter = 0;
     }
   }
+
+  handleGosperGliderButtonClick(isClicked) {
+    if(isClicked) {
+      this.model.setSelectedFigure(this.model.getFigures()[8]);
+      this.view.toggleDropFigure();
+      this.clickDropFigureCounter = 0;
+    }
+  }
   
   handleRunButtonClick(isClicked) {
     if(isClicked) {
@@ -158,7 +166,6 @@ class Controller {
   
   handleRunKey() {
     this.model.setIsSimulationRunning(!this.model.getIsSimulationRunning());
-    //console.log('is running après:', this.model.getIsSimulationRunning());
   }
   
   handleNextKey() {
@@ -168,18 +175,19 @@ class Controller {
   
   handleLeftClick(mx, my) {
    if(this.model.getIsSelectedFigure()) {
-    if(this.clickDropFigureCounter > 0) {
-      //console.log('drop figure');
-      // TODO appeler methode de board pour ajouter la figure
-      //const xCenter = Math.floor(mx / CELL_SIZE);
-      //const yCenter = Math.floor(my / CELL_SIZE);
-      const figureWidth = (this.model.getSelectedFigure().width + 6) * CELL_SIZE;
-      const figureHeight = (this.model.getSelectedFigure().height + 6) * CELL_SIZE;
-      //console.log('figure :', figureWidth, figureHeight);
+    const figureWidth = (this.model.getSelectedFigure().width +  2 * DROP_FIGURE_PADDING) * CELL_SIZE;
+    const figureHeight = (this.model.getSelectedFigure().height + 2 * DROP_FIGURE_PADDING) * CELL_SIZE;
+    if(
+      this.clickDropFigureCounter > 0
+      && mx > figureWidth / 2
+      && my > figureHeight / 2
+      && mx < BOARD_WIDTH - (figureWidth / 2)
+      && my < BOARD_HEIGHT - (figureHeight / 2)
+  ) {
+
       const x = int((mx - figureWidth / 2) / CELL_SIZE);
       const y = int((my - figureHeight / 2) / CELL_SIZE);
       this.board.dropFigure(x, y, this.model.getSelectedFigure());
-      // TODO toggle la view de dropFigure
       this.view.toggleDropFigure();
       this.clickDropFigureCounter = 0;
     }
@@ -215,7 +223,7 @@ class Controller {
        const x = Math.floor(mx / CELL_SIZE);
        const y = Math.floor(my / CELL_SIZE);
        //console.log('x:', x, 'y:', y);
-       this.view.displayNeighborhood(x, y, this.board);
+       //this.view.displayNeighborhood(x, y, this.board);
    }
    else {
      //console.log('clic out board');
