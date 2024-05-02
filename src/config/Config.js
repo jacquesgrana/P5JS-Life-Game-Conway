@@ -3,7 +3,7 @@
 let currentURL = window.location.href;
 let basePath = currentURL.substring(0, currentURL.lastIndexOf('/') + 1);
 const FIGURES_JSON_PATH = basePath + 'json/figures.json';
-console.log('FIGURES_JSON_PATH:', FIGURES_JSON_PATH);
+//console.log('FIGURES_JSON_PATH:', FIGURES_JSON_PATH);
 
 const CELL_SIZE = 10;
 const INFOS_HEIGHT = 120;
@@ -20,7 +20,7 @@ const HELP_POS_X = (BOARD_WIDTH - HELP_WIDTH) / 2;
 const HELP_POS_Y = 2 * PADDING;
 
 
-const HELP_HEIGHT = HELP_POS_Y + 2 * PADDING + 10 * LINE_HEIGHT;
+const HELP_HEIGHT = HELP_POS_Y + 2 * PADDING + 10.5 * LINE_HEIGHT;
 
 
 /*

@@ -90,8 +90,8 @@ class View {
     );
 
     this.buttonFiguresGlider = new Button(
-      HELP_POS_X + HELP_WIDTH/2 - BUTTON_WIDTH/2,
-      HELP_POS_Y + 2 * PADDING + LINE_HEIGHT,
+      HELP_POS_X + HELP_WIDTH/2 - BUTTON_WIDTH * 2 - 1.5 * PADDING,
+      HELP_POS_Y + 2 * PADDING + 1.5 * LINE_HEIGHT,
       BUTTON_WIDTH,
       BUTTON_HEIGHT,
       'Glider',
@@ -106,8 +106,8 @@ class View {
     )
 
     this.buttonFiguresLWSS = new Button(
-      HELP_POS_X + HELP_WIDTH/2 - BUTTON_WIDTH/2,
-      HELP_POS_Y + 2 * PADDING + 2 * LINE_HEIGHT,
+      HELP_POS_X + HELP_WIDTH/2 - BUTTON_WIDTH * 1 - 0.5 * PADDING,
+      HELP_POS_Y + 2 * PADDING + 1.5 * LINE_HEIGHT,
       BUTTON_WIDTH,
       BUTTON_HEIGHT,
       'LWSS',
@@ -119,6 +119,38 @@ class View {
       BUTTON_BG_DISABLED_COLOR,
       true,
       controller.handleLWSSButtonClick.bind(controller)
+    )
+
+    this.buttonFiguresMWSS = new Button(
+      HELP_POS_X + HELP_WIDTH/2  + 0.5 * PADDING,
+      HELP_POS_Y + 2 * PADDING + 1.5 * LINE_HEIGHT,
+      BUTTON_WIDTH,
+      BUTTON_HEIGHT,
+      'MWSS',
+      BUTTON_BG_COLOR,
+      LINES_COLOR,
+      LINES_COLOR,
+      TEXT_COLOR,
+      BUTTON_BG_HOVER_COLOR,
+      BUTTON_BG_DISABLED_COLOR,
+      true,
+      controller.handleMWSSButtonClick.bind(controller)
+    )
+
+    this.buttonFiguresHWSS = new Button(
+      HELP_POS_X + HELP_WIDTH/2 + BUTTON_WIDTH + 1.5 * PADDING,
+      HELP_POS_Y + 2 * PADDING + 1.5 * LINE_HEIGHT,
+      BUTTON_WIDTH,
+      BUTTON_HEIGHT,
+      'HWSS',
+      BUTTON_BG_COLOR,
+      LINES_COLOR,
+      LINES_COLOR,
+      TEXT_COLOR,
+      BUTTON_BG_HOVER_COLOR,
+      BUTTON_BG_DISABLED_COLOR,
+      true,
+      controller.handleHWSSButtonClick.bind(controller)
     )
 
     //handleLWSSButtonClick
@@ -269,10 +301,17 @@ class View {
     textSize(textSize01);
     text('Figures Menu' , HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y +  2 * PADDING);
 
+    textSize(textSize02);
+    text('Spaceships' , HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y +  2 * PADDING + LINE_HEIGHT);
+
     this.buttonFiguresGlider.drawButton();
     this.buttonFiguresGlider.run();
     this.buttonFiguresLWSS.drawButton();
     this.buttonFiguresLWSS.run();
+    this.buttonFiguresMWSS.drawButton();
+    this.buttonFiguresMWSS.run();
+    this.buttonFiguresHWSS.drawButton();
+    this.buttonFiguresHWSS.run();
   }
   
   displayHelp() {
@@ -299,35 +338,37 @@ class View {
     HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 2 * LINE_HEIGHT);
     text('[H] : show/hide help menu' , 
     HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 2.5 * LINE_HEIGHT);
+    text('[F] : show/hide add figure menu' , 
+    HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 3 * LINE_HEIGHT);
     
     textSize(textSize02);
-    text('Mouse :' , HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 3.5 * LINE_HEIGHT);
+    text('Mouse :' , HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 4 * LINE_HEIGHT);
     
     textSize(textSize03);
     text('[Left Click] : change cell state' , 
-    HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 4 * LINE_HEIGHT);
+    HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 4.5 * LINE_HEIGHT);
     
     textSize(textSize02);
-    text('Buttons :' , HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 5 * LINE_HEIGHT);
+    text('Buttons :' , HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 5.5 * LINE_HEIGHT);
     textSize(textSize03);
     text('[Next] : next generation' , 
-    HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 5.5 * LINE_HEIGHT);
-    text('[Run] : run/pause simulation' , 
     HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 6 * LINE_HEIGHT);
-    text('[New] : new simulation without reset' , 
+    text('[Run] : run/pause simulation' , 
     HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 6.5 * LINE_HEIGHT);
-    text('[Clear] : new simulation with no alive cells' , 
+    text('[New] : new simulation without reset' , 
     HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 7 * LINE_HEIGHT);
-    text('[Reset] : new simulation with reset' , 
+    text('[Clear] : new simulation with no alive cells' , 
     HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 7.5 * LINE_HEIGHT);
+    text('[Reset] : new simulation with reset' , 
+    HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 8 * LINE_HEIGHT);
     
     textSize(textSize02);
-    text('Sliders :' , HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 8.5 * LINE_HEIGHT);
+    text('Sliders :' , HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 9 * LINE_HEIGHT);
     textSize(textSize03);
     text('[Left] : modify frame delay' , 
-    HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 9 * LINE_HEIGHT);
-    text('[right] : modify start alive cells proportion' , 
     HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 9.5 * LINE_HEIGHT);
+    text('[right] : modify start alive cells proportion' , 
+    HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 10 * LINE_HEIGHT);
   }
   
   /*
