@@ -112,6 +112,14 @@ class Controller {
       this.clickDropFigureCounter = 0;
     }
   }
+
+  handleSmallGliderButtonClick(isClicked) {
+    if(isClicked) {
+      this.model.setSelectedFigure(this.model.getFigures()[9]);
+      this.view.toggleDropFigure();
+      this.clickDropFigureCounter = 0;
+    }
+  }
   
   handleRunButtonClick(isClicked) {
     if(isClicked) {
@@ -153,6 +161,22 @@ class Controller {
       //console.log('controller : clear : this.model.getFrameInterval()', this.model.getFrameInterval());
     }
   }
+
+  handleLeftRotationKey() {
+    if(this.model.getIsSelectedFigure()) {
+      //console.log('left arrow key');
+      this.model.rotateFigureLeft();
+      //console.log('rotation :', this.model.getSelectedFigureRotation());
+    }
+  }
+
+  handleRightRotationKey() {
+    if(this.model.getIsSelectedFigure()) {
+      //console.log('right arrow key');
+      this.model.rotateFigureRight();
+      //console.log('rotation :', this.model.getSelectedFigureRotation());
+    }
+  }
   
   handleHelpKey() {
     //console.log('help key');
@@ -162,6 +186,7 @@ class Controller {
   handleFiguresKey() {
     //console.log('figures key');
     this.view.toggleShowFigures();
+    this.model.setSelectedFigureRotation(0);
   }
   
   handleRunKey() {
@@ -175,8 +200,14 @@ class Controller {
   
   handleLeftClick(mx, my) {
    if(this.model.getIsSelectedFigure()) {
-    const figureWidth = (this.model.getSelectedFigure().width +  2 * DROP_FIGURE_PADDING) * CELL_SIZE;
-    const figureHeight = (this.model.getSelectedFigure().height + 2 * DROP_FIGURE_PADDING) * CELL_SIZE;
+    let figureWidth = (this.model.getSelectedFigure().width +  2 * DROP_FIGURE_PADDING) * CELL_SIZE;
+    let figureHeight = (this.model.getSelectedFigure().height + 2 * DROP_FIGURE_PADDING) * CELL_SIZE;
+    if(this.model.getSelectedFigureRotation() === 90 || this.model.getSelectedFigureRotation() === 270) {
+        let temp = figureWidth;
+        figureWidth = figureHeight;
+        figureHeight = temp;
+    }
+
     if(
       this.clickDropFigureCounter > 0
       && mx > figureWidth / 2
@@ -185,9 +216,10 @@ class Controller {
       && my < BOARD_HEIGHT - (figureHeight / 2)
   ) {
 
-      const x = int((mx - figureWidth / 2) / CELL_SIZE);
-      const y = int((my - figureHeight / 2) / CELL_SIZE);
-      this.board.dropFigure(x, y, this.model.getSelectedFigure());
+
+      const x = int((mx - figureWidth / 2) / CELL_SIZE) + DROP_FIGURE_PADDING;
+      const y = int((my - figureHeight / 2) / CELL_SIZE) + DROP_FIGURE_PADDING;
+      this.board.dropFigure(x, y, this.model.getSelectedFigure(), this.model.getSelectedFigureRotation());
       this.view.toggleDropFigure();
       this.clickDropFigureCounter = 0;
     }
@@ -208,7 +240,8 @@ class Controller {
       this.board.toggleCellState(x, y);
     }
     else {
-      //console.log('clic out board');
+      //console.log('clic out board');v   
+       
     }
    }
    
