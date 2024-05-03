@@ -233,7 +233,23 @@ class View {
       controller.handleGosperGliderButtonClick.bind(controller)
     )
 
-    //handleLWSSButtonClick
+    this.buttonFiguresSmallGlider = new Button(
+      HELP_POS_X + HELP_WIDTH/2 - BUTTON_WIDTH - 0.5 * PADDING,
+      HELP_POS_Y + 2 * PADDING + 4.5 * LINE_HEIGHT,
+      BUTTON_WIDTH,
+      BUTTON_HEIGHT,
+      'Small',
+      BUTTON_BG_COLOR,
+      LINES_COLOR,
+      LINES_COLOR,
+      TEXT_COLOR,
+      BUTTON_BG_HOVER_COLOR,
+      BUTTON_BG_DISABLED_COLOR,
+      true,
+      controller.handleSmallGliderButtonClick.bind(controller)
+    )
+
+    //handleLWSSButtonClick buttonFiguresSmallGlider
     
     this.sliderSimulSpeed = new Slider(
       PADDING,
@@ -337,7 +353,7 @@ class View {
     text('Generation nb : ' + controller.model.getGenCounter() + ' / Delay : ' + controller.model.getFrameInterval() + ' / Start Alive Proba : ' + controller.model.getCellAliveProbaPercent() + '%', PADDING, BOARD_HEIGHT + PADDING + 5);
     textSize(12);
     textAlign(RIGHT, TOP);
-    text('[H] : help menu / [F] : figure menu', BOARD_WIDTH - PADDING, BOARD_HEIGHT + PADDING + LINE_HEIGHT);
+    text('[H] : help menu / [F] : figures menu', BOARD_WIDTH - PADDING, BOARD_HEIGHT + PADDING + LINE_HEIGHT);
     this.buttonReset.drawButton();
     this.buttonReset.run();
     this.buttonClear.drawButton();
@@ -363,7 +379,7 @@ class View {
     //console.log('figures :', controller.model.getFigures());
     //fill(BG_COLOR);
     //rect(HELP_POS_X, HELP_POS_Y, HELP_WIDTH, HELP_HEIGHT);
-    this.drawDropFigure(controller.model.getSelectedFigure());
+    this.drawDropFigure(controller);
   }
 
   displayFigures(controller) {
@@ -385,7 +401,9 @@ class View {
     text('Spaceships' , HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y +  2 * PADDING + LINE_HEIGHT);
     text('Oscillators' , HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y +  2 * PADDING + 2.5 * LINE_HEIGHT);
     text('Guns' , HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y +  2 * PADDING + 4 * LINE_HEIGHT);
-
+    textSize(textSize03);
+    text('Select a figure and click on the map to paste it' , HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y +  2 * PADDING + 7.5 * LINE_HEIGHT);
+    text('[T / Y] : rotate figure before pasting' , HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y +  2 * PADDING + 8 * LINE_HEIGHT);
     this.buttonFiguresGlider.drawButton();
     this.buttonFiguresGlider.run();
     this.buttonFiguresLWSS.drawButton();
@@ -404,6 +422,8 @@ class View {
     this.buttonFiguresClock.run();
     this.buttonFiguresGosperGlider.drawButton();
     this.buttonFiguresGosperGlider.run();
+    this.buttonFiguresSmallGlider.drawButton();
+    this.buttonFiguresSmallGlider.run();
   }
   
   displayHelp() {
@@ -430,7 +450,7 @@ class View {
     HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 2 * LINE_HEIGHT);
     text('[H] : show/hide help menu' , 
     HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 2.5 * LINE_HEIGHT);
-    text('[F] : show/hide add figure menu' , 
+    text('[F] : show/hide add figures menu' , 
     HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 3 * LINE_HEIGHT);
     
     textSize(textSize02);
@@ -478,12 +498,10 @@ class View {
     rect(xPix, yPix, CELL_SIZE, CELL_SIZE);
   }
 
-  drawDropFigure(figure) {
-    strokeWeight(CELL_STROKE_WEIGHT);
-    stroke(TEXT_COLOR);
-    noFill();
-    //fill(TEXT_COLOR);
+  drawDropFigure(controller) {
 
+    //fill(TEXT_COLOR);
+    const figure = controller.model.getSelectedFigure();
     //console.log('draw figure :', figure);
     const zoneWidth = (figure.width + 2 * DROP_FIGURE_PADDING) * CELL_SIZE;
     const zoneHeight = (figure.height + 2 * DROP_FIGURE_PADDING) * CELL_SIZE;
@@ -491,15 +509,67 @@ class View {
     const figureHeight = figure.height * CELL_SIZE;
     //console.log('zone :', zoneWidth, zoneHeight);
     if(
-      mouseX > (zoneWidth / 2) 
+      (
+        (controller.model.getSelectedFigureRotation() === 0 
+      || controller.model.getSelectedFigureRotation() === 180)
+      && mouseX > (zoneWidth / 2) 
       && mouseY > (zoneHeight / 2)
       && mouseX < (BOARD_WIDTH - (zoneWidth / 2))
       && mouseY < (BOARD_HEIGHT - (zoneHeight / 2))
+    ) || (
+      (controller.model.getSelectedFigureRotation() === 90
+      || controller.model.getSelectedFigureRotation() === 270)
+      && mouseX > (zoneHeight / 2)
+      && mouseY > (zoneWidth / 2)
+      && mouseX < (BOARD_WIDTH - (zoneHeight / 2))
+      && mouseY < (BOARD_HEIGHT - (zoneWidth / 2))
+    )
     ) {
-      rect(mouseX - (zoneWidth / 2), mouseY - (zoneHeight / 2), zoneWidth, zoneHeight);
-      stroke(DANGER_COLOR);
-      rect(mouseX - (figureWidth / 2), mouseY - (figureHeight / 2), figureWidth, figureHeight);
+      this.drawDropFigureSelected(figure, zoneWidth, zoneHeight, figureWidth, figureHeight, controller.model.getSelectedFigureRotation());
     }
+  }
+
+  drawDropFigureSelected(figure, zoneWidth, zoneHeight, figureWidth, figureHeight, rotation) {
+
+    let pointX = 0;
+    let pointY = 0;
+    if(rotation === 0) {
+      pointX = mouseX + (figureWidth / 2) + 10;
+      pointY = mouseY;
+    }
+    else if(rotation === 90) {
+      let temp = figureWidth;
+      figureWidth = figureHeight;
+      figureHeight = temp;
+      temp = zoneWidth;
+      zoneWidth = zoneHeight;
+      zoneHeight = temp;
+      pointX = mouseX;
+      pointY = mouseY - (figureHeight / 2) - 10;
+    }
+    else if(rotation === 180) {
+      pointX = mouseX - (figureWidth / 2) - 10;
+      pointY = mouseY;
+    }
+    else if(rotation === 270) {
+      let temp = figureWidth;
+      figureWidth = figureHeight;
+      figureHeight = temp;
+      temp = zoneWidth;
+      zoneWidth = zoneHeight;
+      zoneHeight = temp;
+      pointX = mouseX;
+      pointY = mouseY + (figureHeight / 2) + 10;
+    }
+    strokeWeight(CELL_STROKE_WEIGHT);
+    stroke(TEXT_COLOR);
+    noFill();
+    rect(mouseX - (zoneWidth / 2), mouseY - (zoneHeight / 2), zoneWidth, zoneHeight);
+    stroke(DANGER_COLOR);
+    rect(mouseX - (figureWidth / 2), mouseY - (figureHeight / 2), figureWidth, figureHeight);
+    fill(DANGER_COLOR);
+    stroke(DANGER_COLOR);
+    ellipse(pointX, pointY, 5, 5);
   }
   
   freeze() {

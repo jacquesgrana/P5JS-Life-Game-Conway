@@ -43,31 +43,97 @@ class BoardManager {
     this.cells = this.initCells(this.model);
   }
 
-  dropFigure(x, y, figure) {
-    // TODO ajouter la figure dans le tableau
-    //console.log('x:', x, 'y:', y, 'figure name:', figure.name);
+  /**
+   * x, y : coordonnées du coin sup gauche de la figure dans le tableau cells au clic de la souris
+   */
+  dropFigure(x, y, figure, rotation) {
+    console.log('x:', x, 'y:', y);
 
-    for (let i= x; i < x + figure.width + 2 * DROP_FIGURE_PADDING; i++) {
-      for (let j= y; j < y + figure.height + 2 * DROP_FIGURE_PADDING; j++) {
-        this.cells[i][j].setState(false);
-      }
-    }
 
+    console.log('rotation:', rotation);
     //console.log('datas:', figure.datas);
-    for (let i= x + DROP_FIGURE_PADDING; i < x + figure.width + DROP_FIGURE_PADDING; i++) {
-      for (let j= y + DROP_FIGURE_PADDING; j < y + figure.height + DROP_FIGURE_PADDING; j++) {
-        const ii = i - DROP_FIGURE_PADDING - x;
-        const jj = j - DROP_FIGURE_PADDING - y;
-        //console.log('i:', i, 'j:', j, 'ii:', ii, 'jj:', jj);
-        //if(ii === 4) console.log(figure.datas[ii]);
-        if(figure.datas[ii][jj] === 1) {
-          this.cells[i][j].setState(true);
+    if(rotation === 0) {
+      for (let i= x - DROP_FIGURE_PADDING; i < x + figure.width + DROP_FIGURE_PADDING; i++) {
+        for (let j= y - DROP_FIGURE_PADDING; j < y + figure.height + DROP_FIGURE_PADDING; j++) {
+          this.cells[i][j].setState(false);
+        }
+      }
+
+
+
+      for (let i = x; i < x + figure.width; i++) {
+        for (let j= y; j < y + figure.height; j++) {
+          let ii = i - x;
+          let jj = j - y;
+          if(figure.datas[ii][jj] === 1) {
+            this.cells[i][j].setState(true);
+          }
         }
       }
     }
+    else if(rotation === 90) {
 
+      for (let i= x - DROP_FIGURE_PADDING; i < x + figure.height + DROP_FIGURE_PADDING; i++) {
+        for (let j= y - DROP_FIGURE_PADDING; j < y + figure.width + DROP_FIGURE_PADDING; j++) {
+          this.cells[i][j].setState(false);
+        }
+      }
+
+      for (let i = x; i < x + figure.height; i++) {
+        for (let j = y; j < y + figure.width; j++) {
+          let ii = figure.width - 1 - j + y; //figure.height - 1 - i + x
+          let jj = i - x;
+          if(figure.datas[ii][jj] === 1) {
+            this.cells[i][j].setState(true);
+          }
+        }
+      }
+      
+    }
+    else if(rotation === 180) {
+      for (let i= x - DROP_FIGURE_PADDING; i < x + figure.width + DROP_FIGURE_PADDING; i++) {
+        for (let j= y - DROP_FIGURE_PADDING; j < y + figure.height + DROP_FIGURE_PADDING; j++) {
+          this.cells[i][j].setState(false);
+        }
+      }
+
+
+      for (let i= x ; i < x + figure.width; i++) {
+        for (let j= y; j < y + figure.height; j++) {
+          let ii = i - x;
+          ii = figure.width - 1 - ii;
+          let jj = j - y;
+          jj = figure.height - 1 - jj;
+          if(figure.datas[ii][jj] === 1) {
+            this.cells[i][j].setState(true);
+          }
+        }
+      }
+    }
+    else if(rotation === 270) {
+
+      for (let i= x - DROP_FIGURE_PADDING; i < x + figure.height + DROP_FIGURE_PADDING; i++) {
+        for (let j= y - DROP_FIGURE_PADDING; j < y + figure.width + DROP_FIGURE_PADDING; j++) {
+          this.cells[i][j].setState(false);
+        }
+      }
+
+      for (let i = x; i < x + figure.height; i++) {
+        for (let j = y; j < y + figure.width; j++) {
+          let ii = j - y;
+          let jj = figure.height - 1 - i + x;
+          if(figure.datas[ii][jj] === 1) {
+            this.cells[i][j].setState(true);
+          }
+        }
+      }
+    }
   }
   
+ 
+
+   
+
   generateNext() {
     //console.log('board : next');
     //this.cells = [];
