@@ -120,6 +120,14 @@ class Controller {
       this.clickDropFigureCounter = 0;
     }
   }
+
+  handleSimkinGliderButtonClick(isClicked) {
+    if(isClicked) {
+      this.model.setSelectedFigure(this.model.getFigures()[10]);
+      this.view.toggleDropFigure();
+      this.clickDropFigureCounter = 0;
+    }
+  }
   
   handleRunButtonClick(isClicked) {
     if(isClicked) {
