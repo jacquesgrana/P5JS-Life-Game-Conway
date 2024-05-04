@@ -265,7 +265,23 @@ class View {
       controller.handleSimkinGliderButtonClick.bind(controller)
     )
 
-    //handleLWSSButtonClick buttonFiguresSmallGlider
+    this.buttonFiguresGliderless = new Button(
+      HELP_POS_X + HELP_WIDTH/2 + BUTTON_WIDTH + 1.5 * PADDING,
+      HELP_POS_Y + 2 * PADDING + 4.5 * LINE_HEIGHT,
+      BUTTON_WIDTH,
+      BUTTON_HEIGHT,
+      'Less',
+      BUTTON_BG_COLOR,
+      LINES_COLOR,
+      LINES_COLOR,
+      TEXT_COLOR,
+      BUTTON_BG_HOVER_COLOR,
+      BUTTON_BG_DISABLED_COLOR,
+      true,
+      controller.handleGliderlessButtonClick.bind(controller)
+    )
+
+    //buttonFiguresGliderless
     
     this.sliderSimulSpeed = new Slider(
       PADDING,
@@ -442,6 +458,8 @@ class View {
     this.buttonFiguresSmallGlider.run();
     this.buttonFiguresSimkinGlider.drawButton();
     this.buttonFiguresSimkinGlider.run();
+    this.buttonFiguresGliderless.drawButton();
+    this.buttonFiguresGliderless.run();
   }
   
   displayHelp() {

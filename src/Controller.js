@@ -128,6 +128,14 @@ class Controller {
       this.clickDropFigureCounter = 0;
     }
   }
+
+  handleGliderlessButtonClick(isClicked) {
+    if(isClicked) {
+      this.model.setSelectedFigure(this.model.getFigures()[11]);
+      this.view.toggleDropFigure();
+      this.clickDropFigureCounter = 0;
+    }
+  }
   
   handleRunButtonClick(isClicked) {
     if(isClicked) {
