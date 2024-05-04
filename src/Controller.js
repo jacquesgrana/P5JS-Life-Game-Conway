@@ -136,6 +136,38 @@ class Controller {
       this.clickDropFigureCounter = 0;
     }
   }
+
+  handleBackrakeButtonClick(isClicked) {
+    if(isClicked) {
+      this.model.setSelectedFigure(this.model.getFigures()[12]);
+      this.view.toggleDropFigure();
+      this.clickDropFigureCounter = 0;
+    }
+  }
+
+  handleBackrakeTwoButtonClick(isClicked) {
+    if(isClicked) {
+      this.model.setSelectedFigure(this.model.getFigures()[13]);
+      this.view.toggleDropFigure();
+      this.clickDropFigureCounter = 0;
+    }
+  }
+
+  handleSpacerakeButtonClick(isClicked) {
+    if(isClicked) {
+      this.model.setSelectedFigure(this.model.getFigures()[14]);
+      this.view.toggleDropFigure();
+      this.clickDropFigureCounter = 0;
+    }
+  }
+
+  handleSlowPufferButtonClick(isClicked) {
+    if(isClicked) {
+      this.model.setSelectedFigure(this.model.getFigures()[15]);
+      this.view.toggleDropFigure();
+      this.clickDropFigureCounter = 0;
+    }
+  }
   
   handleRunButtonClick(isClicked) {
     if(isClicked) {

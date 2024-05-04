@@ -36,10 +36,10 @@ function mouseReleased(e) {
 
 function keyTyped() {
   if (key === 'N' || key === 'n') {
-    controller.handleNextKey();
+    //controller.handleNextKey();
   }
   if (key === 'R' || key === 'r') {
-    controller.handleRunKey();
+    ///controller.handleRunKey();
   }
   if (key === 'H' || key === 'h') {
     controller.handleHelpKey();

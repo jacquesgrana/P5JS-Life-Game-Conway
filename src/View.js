@@ -90,8 +90,8 @@ class View {
     );
 
     this.buttonFiguresGlider = new Button(
-      HELP_POS_X + HELP_WIDTH/2 - BUTTON_WIDTH * 2 - 1.5 * PADDING,
-      HELP_POS_Y + 2 * PADDING + 1.5 * LINE_HEIGHT,
+      FIGURES_POS_X + FIGURES_WIDTH/2 - BUTTON_WIDTH * 2 - 1.5 * PADDING,
+      FIGURES_POS_Y + 2 * PADDING + 1.5 * LINE_HEIGHT,
       BUTTON_WIDTH,
       BUTTON_HEIGHT,
       'Glider',
@@ -106,8 +106,8 @@ class View {
     )
 
     this.buttonFiguresLWSS = new Button(
-      HELP_POS_X + HELP_WIDTH/2 - BUTTON_WIDTH * 1 - 0.5 * PADDING,
-      HELP_POS_Y + 2 * PADDING + 1.5 * LINE_HEIGHT,
+      FIGURES_POS_X + FIGURES_WIDTH/2 - BUTTON_WIDTH * 1 - 0.5 * PADDING,
+      FIGURES_POS_Y + 2 * PADDING + 1.5 * LINE_HEIGHT,
       BUTTON_WIDTH,
       BUTTON_HEIGHT,
       'LWSS',
@@ -122,8 +122,8 @@ class View {
     )
 
     this.buttonFiguresMWSS = new Button(
-      HELP_POS_X + HELP_WIDTH/2  + 0.5 * PADDING,
-      HELP_POS_Y + 2 * PADDING + 1.5 * LINE_HEIGHT,
+      FIGURES_POS_X + FIGURES_WIDTH/2  + 0.5 * PADDING,
+      FIGURES_POS_Y + 2 * PADDING + 1.5 * LINE_HEIGHT,
       BUTTON_WIDTH,
       BUTTON_HEIGHT,
       'MWSS',
@@ -138,8 +138,8 @@ class View {
     )
 
     this.buttonFiguresHWSS = new Button(
-      HELP_POS_X + HELP_WIDTH/2 + BUTTON_WIDTH + 1.5 * PADDING,
-      HELP_POS_Y + 2 * PADDING + 1.5 * LINE_HEIGHT,
+      FIGURES_POS_X + FIGURES_WIDTH/2 + BUTTON_WIDTH + 1.5 * PADDING,
+      FIGURES_POS_Y + 2 * PADDING + 1.5 * LINE_HEIGHT,
       BUTTON_WIDTH,
       BUTTON_HEIGHT,
       'HWSS',
@@ -154,8 +154,8 @@ class View {
     )
 
     this.buttonFiguresCross = new Button(
-      HELP_POS_X + HELP_WIDTH/2 - BUTTON_WIDTH * 2 - 1.5 * PADDING,
-      HELP_POS_Y + 2 * PADDING + 3 * LINE_HEIGHT,
+      FIGURES_POS_X + FIGURES_WIDTH/2 - BUTTON_WIDTH * 2 - 1.5 * PADDING,
+      FIGURES_POS_Y + 2 * PADDING + 3 * LINE_HEIGHT,
       BUTTON_WIDTH,
       BUTTON_HEIGHT,
       'Cross',
@@ -170,8 +170,8 @@ class View {
     )
 
     this.buttonFiguresPulsar = new Button(
-      HELP_POS_X + HELP_WIDTH/2 - BUTTON_WIDTH * 1 - 0.5 * PADDING,
-      HELP_POS_Y + 2 * PADDING + 3 * LINE_HEIGHT,
+      FIGURES_POS_X + FIGURES_WIDTH/2 - BUTTON_WIDTH * 1 - 0.5 * PADDING,
+      FIGURES_POS_Y + 2 * PADDING + 3 * LINE_HEIGHT,
       BUTTON_WIDTH,
       BUTTON_HEIGHT,
       'Pulsar',
@@ -186,8 +186,8 @@ class View {
     )
 
     this.buttonFiguresPentadeca = new Button(
-      HELP_POS_X + HELP_WIDTH/2  + 0.5 * PADDING,
-      HELP_POS_Y + 2 * PADDING + 3 * LINE_HEIGHT,
+      FIGURES_POS_X + FIGURES_WIDTH/2  + 0.5 * PADDING,
+      FIGURES_POS_Y + 2 * PADDING + 3 * LINE_HEIGHT,
       BUTTON_WIDTH,
       BUTTON_HEIGHT,
       'Penta',
@@ -202,8 +202,8 @@ class View {
     )
 
     this.buttonFiguresClock = new Button(
-      HELP_POS_X + HELP_WIDTH/2 + BUTTON_WIDTH + 1.5 * PADDING,
-      HELP_POS_Y + 2 * PADDING + 3 * LINE_HEIGHT,
+      FIGURES_POS_X + FIGURES_WIDTH/2 + BUTTON_WIDTH + 1.5 * PADDING,
+      FIGURES_POS_Y + 2 * PADDING + 3 * LINE_HEIGHT,
       BUTTON_WIDTH,
       BUTTON_HEIGHT,
       'Clock',
@@ -218,8 +218,8 @@ class View {
     )
 
     this.buttonFiguresGosperGlider = new Button(
-      HELP_POS_X + HELP_WIDTH/2 - BUTTON_WIDTH * 2 - 1.5 * PADDING,
-      HELP_POS_Y + 2 * PADDING + 4.5 * LINE_HEIGHT,
+      FIGURES_POS_X + FIGURES_WIDTH/2 - BUTTON_WIDTH * 2 - 1.5 * PADDING,
+      FIGURES_POS_Y + 2 * PADDING + 4.5 * LINE_HEIGHT,
       BUTTON_WIDTH,
       BUTTON_HEIGHT,
       'Gosper',
@@ -234,8 +234,8 @@ class View {
     )
 
     this.buttonFiguresSmallGlider = new Button(
-      HELP_POS_X + HELP_WIDTH/2 - BUTTON_WIDTH - 0.5 * PADDING,
-      HELP_POS_Y + 2 * PADDING + 4.5 * LINE_HEIGHT,
+      FIGURES_POS_X + FIGURES_WIDTH/2 - BUTTON_WIDTH - 0.5 * PADDING,
+      FIGURES_POS_Y + 2 * PADDING + 4.5 * LINE_HEIGHT,
       BUTTON_WIDTH,
       BUTTON_HEIGHT,
       'Small',
@@ -250,8 +250,8 @@ class View {
     )
 
     this.buttonFiguresSimkinGlider = new Button(
-      HELP_POS_X + HELP_WIDTH/2  + 0.5 * PADDING,
-      HELP_POS_Y + 2 * PADDING + 4.5 * LINE_HEIGHT,
+      FIGURES_POS_X + FIGURES_WIDTH/2  + 0.5 * PADDING,
+      FIGURES_POS_Y + 2 * PADDING + 4.5 * LINE_HEIGHT,
       BUTTON_WIDTH,
       BUTTON_HEIGHT,
       'Simkin',
@@ -266,8 +266,8 @@ class View {
     )
 
     this.buttonFiguresGliderless = new Button(
-      HELP_POS_X + HELP_WIDTH/2 + BUTTON_WIDTH + 1.5 * PADDING,
-      HELP_POS_Y + 2 * PADDING + 4.5 * LINE_HEIGHT,
+      FIGURES_POS_X + FIGURES_WIDTH/2 + BUTTON_WIDTH + 1.5 * PADDING,
+      FIGURES_POS_Y + 2 * PADDING + 4.5 * LINE_HEIGHT,
       BUTTON_WIDTH,
       BUTTON_HEIGHT,
       'Less',
@@ -281,6 +281,69 @@ class View {
       controller.handleGliderlessButtonClick.bind(controller)
     )
 
+    this.buttonFiguresBackrake = new Button(
+      FIGURES_POS_X + FIGURES_WIDTH/2 - BUTTON_WIDTH * 2 - 1.5 * PADDING,
+      FIGURES_POS_Y + 2 * PADDING + 6 * LINE_HEIGHT,
+      BUTTON_WIDTH,
+      BUTTON_HEIGHT,
+      'Rake 1',
+      BUTTON_BG_COLOR,
+      LINES_COLOR,
+      LINES_COLOR,
+      TEXT_COLOR,
+      BUTTON_BG_HOVER_COLOR,
+      BUTTON_BG_DISABLED_COLOR,
+      true,
+      controller.handleBackrakeButtonClick.bind(controller)
+    )
+
+    this.buttonFiguresBackrakeTwo = new Button(
+      FIGURES_POS_X + FIGURES_WIDTH/2 - BUTTON_WIDTH - 0.5 * PADDING,
+      FIGURES_POS_Y + 2 * PADDING + 6 * LINE_HEIGHT,
+      BUTTON_WIDTH,
+      BUTTON_HEIGHT,
+      'Rake 2',
+      BUTTON_BG_COLOR,
+      LINES_COLOR,
+      LINES_COLOR,
+      TEXT_COLOR,
+      BUTTON_BG_HOVER_COLOR,
+      BUTTON_BG_DISABLED_COLOR,
+      true,
+      controller.handleBackrakeTwoButtonClick.bind(controller)
+    )
+
+    this.buttonFiguresSpacerake = new Button(
+      FIGURES_POS_X + FIGURES_WIDTH/2  + 0.5 * PADDING,
+      FIGURES_POS_Y + 2 * PADDING + 6 * LINE_HEIGHT,
+      BUTTON_WIDTH,
+      BUTTON_HEIGHT,
+      'Space',
+      BUTTON_BG_COLOR,
+      LINES_COLOR,
+      LINES_COLOR,
+      TEXT_COLOR,
+      BUTTON_BG_HOVER_COLOR,
+      BUTTON_BG_DISABLED_COLOR,
+      true,
+      controller.handleSpacerakeButtonClick.bind(controller)
+    )
+
+    this.buttonFiguresSlowPuffer = new Button(
+      FIGURES_POS_X + FIGURES_WIDTH/2 + BUTTON_WIDTH + 1.5 * PADDING,
+      FIGURES_POS_Y + 2 * PADDING + 6 * LINE_HEIGHT,
+      BUTTON_WIDTH,
+      BUTTON_HEIGHT,
+      'Slow',
+      BUTTON_BG_COLOR,
+      LINES_COLOR,
+      LINES_COLOR,
+      TEXT_COLOR,
+      BUTTON_BG_HOVER_COLOR,
+      BUTTON_BG_DISABLED_COLOR,
+      true,
+      controller.handleSlowPufferButtonClick.bind(controller)
+    )
     //buttonFiguresGliderless
     
     this.sliderSimulSpeed = new Slider(
@@ -421,21 +484,22 @@ class View {
     const textSize03 = 14;
 
     fill(BG_COLOR);
-    rect(HELP_POS_X, HELP_POS_Y, HELP_WIDTH, HELP_HEIGHT);
+    rect(FIGURES_POS_X, FIGURES_POS_Y, FIGURES_WIDTH, FIGURES_HEIGHT);
 
     fill(TEXT_COLOR);
     
     textAlign(CENTER, TOP);
     textSize(textSize01);
-    text('Figures Menu' , HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y +  2 * PADDING);
+    text('Figures Menu' , FIGURES_POS_X + FIGURES_WIDTH/2, FIGURES_POS_Y +  2 * PADDING);
 
     textSize(textSize02);
-    text('Spaceships' , HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y +  2 * PADDING + LINE_HEIGHT);
-    text('Oscillators' , HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y +  2 * PADDING + 2.5 * LINE_HEIGHT);
-    text('Guns' , HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y +  2 * PADDING + 4 * LINE_HEIGHT);
+    text('Spaceships' , FIGURES_POS_X + FIGURES_WIDTH/2, FIGURES_POS_Y +  2 * PADDING + LINE_HEIGHT);
+    text('Oscillators' , FIGURES_POS_X + FIGURES_WIDTH/2, FIGURES_POS_Y +  2 * PADDING + 2.5 * LINE_HEIGHT);
+    text('Guns' , FIGURES_POS_X + FIGURES_WIDTH/2, FIGURES_POS_Y +  2 * PADDING + 4 * LINE_HEIGHT);
+    text('Puffers' , FIGURES_POS_X + FIGURES_WIDTH/2, FIGURES_POS_Y +  2 * PADDING + 5.5 * LINE_HEIGHT);
     textSize(textSize03);
-    text('Select a figure and click on the map to paste it' , HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y +  2 * PADDING + 7.5 * LINE_HEIGHT);
-    text('[T / Y] : rotate figure before pasting' , HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y +  2 * PADDING + 8 * LINE_HEIGHT);
+    text('Select a figure and click on the map to paste it' , FIGURES_POS_X + FIGURES_WIDTH/2, FIGURES_POS_Y +  2 * PADDING + 7.5 * LINE_HEIGHT);
+    text('[T / Y] : rotate figure before pasting' , FIGURES_POS_X + FIGURES_WIDTH/2, FIGURES_POS_Y +  2 * PADDING + 8 * LINE_HEIGHT);
     this.buttonFiguresGlider.drawButton();
     this.buttonFiguresGlider.run();
     this.buttonFiguresLWSS.drawButton();
@@ -460,6 +524,14 @@ class View {
     this.buttonFiguresSimkinGlider.run();
     this.buttonFiguresGliderless.drawButton();
     this.buttonFiguresGliderless.run();
+    this.buttonFiguresBackrake.drawButton();
+    this.buttonFiguresBackrake.run();
+    this.buttonFiguresBackrakeTwo.drawButton();
+    this.buttonFiguresBackrakeTwo.run();    
+    this.buttonFiguresSpacerake.drawButton();
+    this.buttonFiguresSpacerake.run();
+    this.buttonFiguresSlowPuffer.drawButton();
+    this.buttonFiguresSlowPuffer.run();
   }
   
   displayHelp() {
@@ -480,43 +552,43 @@ class View {
     text('Keys :' , HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y +  2 * PADDING + LINE_HEIGHT);
     
     textSize(textSize03);
-    text('[N] : next generation' , 
-    HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 1.5 * LINE_HEIGHT);
-    text('[R] : run/pause simulation' , 
-    HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 2 * LINE_HEIGHT);
+    //text('[N] : next generation' , 
+    //HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 1.5 * LINE_HEIGHT);
+    //text('[R] : run/pause simulation' , 
+    //HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 2 * LINE_HEIGHT);
     text('[H] : show/hide help menu' , 
-    HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 2.5 * LINE_HEIGHT);
+    HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 1.5 * LINE_HEIGHT);
     text('[F] : show/hide add figures menu' , 
-    HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 3 * LINE_HEIGHT);
+    HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 2 * LINE_HEIGHT);
     
     textSize(textSize02);
-    text('Mouse :' , HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 4 * LINE_HEIGHT);
+    text('Mouse :' , HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 3 * LINE_HEIGHT);
     
     textSize(textSize03);
     text('[Left Click] : change cell state' , 
-    HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 4.5 * LINE_HEIGHT);
+    HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 3.5 * LINE_HEIGHT);
     
     textSize(textSize02);
-    text('Buttons :' , HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 5.5 * LINE_HEIGHT);
+    text('Buttons :' , HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 4.5 * LINE_HEIGHT);
     textSize(textSize03);
     text('[Next] : next generation' , 
-    HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 6 * LINE_HEIGHT);
+    HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 5 * LINE_HEIGHT);
     text('[Run] : run/pause simulation' , 
-    HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 6.5 * LINE_HEIGHT);
+    HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 5.5 * LINE_HEIGHT);
     text('[New] : new simulation without reset' , 
-    HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 7 * LINE_HEIGHT);
+    HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 6 * LINE_HEIGHT);
     text('[Clear] : new simulation with no alive cells' , 
-    HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 7.5 * LINE_HEIGHT);
+    HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 6.5 * LINE_HEIGHT);
     text('[Reset] : new simulation with reset' , 
-    HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 8 * LINE_HEIGHT);
+    HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 7 * LINE_HEIGHT);
     
     textSize(textSize02);
-    text('Sliders :' , HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 9 * LINE_HEIGHT);
+    text('Sliders :' , HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 8 * LINE_HEIGHT);
     textSize(textSize03);
     text('[Left] : modify frame delay' , 
-    HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 9.5 * LINE_HEIGHT);
+    HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 8.5 * LINE_HEIGHT);
     text('[right] : modify start alive cells proportion' , 
-    HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 10 * LINE_HEIGHT);
+    HELP_POS_X + HELP_WIDTH/2, HELP_POS_Y + 2 * PADDING + 9 * LINE_HEIGHT);
   }
   
   /*
